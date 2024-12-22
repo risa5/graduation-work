@@ -54,6 +54,6 @@ Twitter（X）だと褒めることに特化していないため傷つくない
 * プライバシーポリシー
 
 # ■ 機能の実装方針予定
-* ログイン/ログアウト機能：Gemファイルsorceryを使用して実装
-* 一覧画面のページネーション：Gemファイルkaminari/bootstrap5-kaminari-viewsを使用して実装
-* 検索機能：Gemファイルransackを使用して実装
+* ログイン/ログアウト機能:Gemファイルsorceryを使用して実装
+* 一覧画面のページネーション:emファイルkaminari/bootstrap5-kaminari-viewsを使用して実装
+* 検索機能:Gemファイルransackを使用して実装
