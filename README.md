@@ -1,3 +1,6 @@
+# ■FigmaURL
+https://www.figma.com/design/wwtXI292pDP4qOH2jfd32j/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C%E3%80%90%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%E3%80%91?node-id=45-2&t=PIW0Pris5zM3rPxz-1
+
 # ■サービス概要
 * いくつかの質問に答えるだけで、その日の自分に合った癒し方を提案するWebアプリケーション
 * 科学的根拠や心理学に基づいたアクションプランを提供し、忙しい毎日にちょっとした心のリセットをサポート
