@@ -1,3 +1,6 @@
+# ■ER図
+[![Image from Gyazo](https://i.gyazo.com/cd866684ad34f6665ab51b76b6342f3c.png)](https://gyazo.com/cd866684ad34f6665ab51b76b6342f3c)
+
 # ■FigmaURL
 https://www.figma.com/design/wwtXI292pDP4qOH2jfd32j/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C%E3%80%90%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%E3%80%91?node-id=45-2&t=PIW0Pris5zM3rPxz-1
 
