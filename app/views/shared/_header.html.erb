@@ -1,0 +1,47 @@
+<header>
+  <nav class='navbar navbar-expand-lg navigation navbar-light bg-light'>
+    <!-- ロゴ画像をクリックするとトップページ（'/'）へ遷移 -->
+    <%= link_to '/', class: 'navbar-brand' do %>
+      <%= image_tag 'logo.png' %>
+    <% end %>
+    <!-- ハンバーガーメニュー -->
+    <button class='navbar-toggler' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent'
+      aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+      <span class='navbar-toggler-icon'></span>
+    </button>
+
+    <!-- ナビゲーションメニュー（PCでは通常表示、スマホでは折りたたみ可能） -->
+    <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+      <ul class='navbar-nav ms-auto main-nav align-items-center'>
+        <!-- 掲示板メニュー（ドロップダウン） -->
+        <li class='nav-item dropdown dropdown-slide'>
+          <!-- 「掲示板」ボタンをクリックすると、ドロップダウンメニューが展開 -->
+          <%= link_to '掲示板', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+          <div class='dropdown-menu dropdown-menu-end'>
+            <!-- 掲示板一覧ページへのリンク -->
+            <%= link_to '掲示板一覧', '#', class: 'dropdown-item' %>
+            <!-- 掲示板作成ページへのリンク -->
+            <%= link_to '掲示板作成', '#', class: 'dropdown-item' %>
+          </div>
+        </li>
+
+        <!-- ユーザーのプロフィールメニュー（ドロップダウン） -->
+        <li class='nav-item dropdown dropdown-slide'>
+        <!-- ユーザーアイコンをクリックすると、ドロップダウンメニューが展開 -->
+          <%= link_to '#', class: 'nav-link', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
+            <!-- ユーザーのプロフィール画像 -->
+            <%= image_tag 'sample.jpg', class: 'rounded-circle mr15', width: '40', height: '40' %>
+          <% end %>
+          <div class='dropdown-menu dropdown-menu-end'>
+            <div class='dropdown-item'>ダミーユーザー</div>
+            <div class='dropdown-divider'></div>
+            <!-- ログアウトボタン -->
+            <%= form_with url: logout_path, method: :delete, data: { turbo: false } do %>
+              <%= submit_tag "ログアウト", class: "btn btn-danger" %>
+            <% end %>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

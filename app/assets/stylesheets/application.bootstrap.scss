@@ -1,2 +1,13 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
+@use 'bootstrap/scss/bootstrap';
+@use 'bootstrap-icons/font/bootstrap-icons';
+@use 'top';
+
+// ヘッダーの背景色をカスタマイズ
+header {
+    background-color: #FFF1ED !important; // 好きな色に変更（例: 青）
+  }
+  
+  // Bootstrapの `bg-light` を上書き
+  .navbar {
+    background-color: #FFF1ED !important; // 好きな色に変更
+  }

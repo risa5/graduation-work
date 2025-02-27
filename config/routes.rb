@@ -1,14 +1,25 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # ルートパス（アプリのトップページ）
+  # アクセスすると `StaticPagesController` の `top` アクションが実行される
+  root "static_pages#top"
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # `users` リソースのルーティング
+  # `only: %i[new create]` を指定して、`new`（登録フォーム表示）と `create`（登録処理）だけを有効にする
+  resources :users, only: %i[new create]
 
-  # Render dynamic PWA files from app/views/pwa/*
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  # ログインページの表示
+  # `GET /login` にアクセスすると、`UserSessionsController` の `new` アクションが実行される
+  # → ログインフォームを表示
+  get 'login', to: 'user_sessions#new'
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+    # ログイン処理
+  # `POST /login` にログイン情報（メールアドレス・パスワード）を送信すると
+  # `UserSessionsController` の `create` アクションが実行される
+  # → 認証成功ならログイン状態になり、リダイレクトなどの処理が行われる
+  post 'login', to: 'user_sessions#create'
+
+  # ログアウト処理
+  # `DELETE /logout` にアクセスすると、`UserSessionsController` の `destroy` アクションが実行される
+  # → セッションを削除してログアウト処理を行い、トップページへリダイレクト
+  delete 'logout', to: 'user_sessions#destroy', as: :logout
 end

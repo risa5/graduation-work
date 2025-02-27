@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Myapp" %></title>
+    <!-- ページタイトル（ブラウザのタブに表示される） -->
+    <title>HealScan</title>
+    <!-- レスポンシブデザインを有効化（スマホ・タブレット対応） -->
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- CSRF（クロスサイトリクエストフォージェリ）対策用のメタタグ -->
     <%= csrf_meta_tags %>
+    <!-- CSP（コンテンツセキュリティポリシー）対策用のメタタグ -->
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
-
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <!-- スタイルシートの読み込み -->
+    <%= stylesheet_link_tag "application" %>
+    <!-- JavaScriptの読み込み（Turbolinks用・再読み込みが必要な場合に適用） -->
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
+    <!-- ヘッダーの表示（ログイン状態によって切り替え） -->
+    <% if logged_in? %>
+      <!-- ログイン済みなら通常のヘッダーを表示 -->
+      <%= render 'shared/header' %>
+    <% else %>
+      <!-- 未ログインならログイン前用のヘッダーを表示 -->
+      <%= render 'shared/before_login_header' %>
+    <% end %>
+    <!-- 各ページのコンテンツが挿入される部分（ビューの内容を表示） -->
     <%= yield %>
+    <!-- フッターの表示 -->
+    <%= render 'shared/footer' %>
   </body>
 </html>
+
