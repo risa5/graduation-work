@@ -1,0 +1,32 @@
+<div class="col-sm-12 col-lg-4 mb-3">
+  <div id="board-id-<%= board.id %>">
+    <div class="card">
+      <%= image_tag board.board_image_url, class: "card-img-top", width: "300", height:"200" %>
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <h4 class="card-title mb-0">
+            <%= link_to board.title, board_path(board) %>
+          </h4>
+          <% if current_user.own?(board) %>
+            <div class="ms-auto d-flex align-items-center">
+              <!-- 編集ボタン -->
+              <%= link_to edit_board_path(board), id: "button-edit-#{board.id}", class: "me-2 text-primary" do %>
+                <i class="bi bi-pencil-fill"></i>
+              <% end %>
+
+              <!-- 削除ボタン -->
+              <%= button_to board_path(board), method: :delete, data: { turbo: false, confirm: t('defaults.delete_confirm') }, class: "btn btn-link p-0 border-0 text-danger d-flex align-items-center" do %>
+                <i class="bi bi-trash-fill"></i>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <ul class="list-inline mt-2 mb-1">
+          <li><i class="bi bi-person"></i> <%= board.user.name %></li>
+          <li><i class="bi bi-calendar"></i> <%= l board.created_at, format: :short %></li>
+        </ul>
+        <p class="card-text"><%= board.body %></p>
+      </div>
+    </div>
+  </div>
+</div>

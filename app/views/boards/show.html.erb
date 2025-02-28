@@ -1,0 +1,37 @@
+<div class="container pt-5">
+  <div class="row mb-3">
+    <div class="col-lg-8 offset-lg-2">
+      <h1><%= t('.title') %></h1>
+      <article class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3">
+              <%= image_tag @board.board_image_url, width: "300", height: "200", class: "card-img-top img-fluid" %>
+            </div>
+            <div class="col-md-9">
+              <h3 style="display: inline;"><%= @board.title %></h3>
+              <ul class="list-inline">
+                <li class="list-inline-item"><%= "by #{@board.user.name}" %></li>
+                <li class="list-inline-item"><%= l @board.created_at, format: :long %></li>
+              </ul>
+              <% if current_user.own?(@board) %>
+              <div class='d-flex justify-content-end'>
+                <!-- 編集ボタン -->
+                <%= link_to edit_board_path(@board), id: "button-edit-#{@board.id}", class: "me-2 text-primary" do %>
+                  <i class="bi bi-pencil-fill"></i>
+                <% end %>
+            
+                <!-- 削除ボタン（修正：button_to に変更） -->
+                <%= button_to board_path(@board), method: :delete, data: { turbo: false, confirm: t('defaults.delete_confirm') }, class: "btn btn-link p-0 border-0 text-danger d-flex align-items-center" do %>
+                  <i class="bi bi-trash-fill"></i>
+                <% end %>
+              </div>
+            <% end %>
+            </div>
+            <p><%= simple_format(@board.body) %></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>

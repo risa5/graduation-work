@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   # `only: %i[new create]` を指定して、`new`（登録フォーム表示）と `create`（登録処理）だけを有効にする
   resources :users, only: %i[new create]
 
+  resources :boards, only: %i[index new create show edit destroy update]
+
   # ログインページの表示
   # `GET /login` にアクセスすると、`UserSessionsController` の `new` アクションが実行される
   # → ログインフォームを表示

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_27_205901) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_28_012246) do
+  create_table "boards", charset: "utf8mb4", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "board_image"
+    t.index ["user_id"], name: "index_boards_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -21,4 +31,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_27_205901) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  add_foreign_key "boards", "users"
 end

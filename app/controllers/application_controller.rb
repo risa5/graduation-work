@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
   # `sorcery` の `require_login` によってログイン必須のアクションに適用される
   # ログインしていない場合は `login_path` にリダイレクトさせる
   def not_authenticated
-    redirect_to login_path
+    redirect_to login_path, danger: 'ログインが必要です'
   end
 end
