@@ -1,0 +1,10 @@
+<h1>診断結果</h1>
+<p>あなたに合った癒しの方法は: <strong><%= @diagnosis.result %></strong></p>
+
+<p>必要なもの: <%= @diagnosis.question1 %></p>
+<p>癒しにかけられる時間: <%= @diagnosis.question2 %></p>
+<p>気分: <%= @diagnosis.question3 %></p>
+
+<%= link_to 'トップへ戻る', root_path, class: 'btn btn-primary' %>
+
+<%= link_to "もう一度診断する", new_diagnosis_path, class: "btn btn-secondary mt-3" %>

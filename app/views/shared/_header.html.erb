@@ -13,6 +13,9 @@
     <!-- ナビゲーションメニュー（PCでは通常表示、スマホでは折りたたみ可能） -->
     <div class='collapse navbar-collapse' id='navbarSupportedContent'>
       <ul class='navbar-nav ms-auto main-nav align-items-center'>
+        <li class="nav-item">
+          <%= link_to '診断する', new_diagnosis_path, class: "nav-link" %>
+        </li>
         <!-- 掲示板メニュー（ドロップダウン） -->
         <li class='nav-item dropdown dropdown-slide'>
           <!-- 「掲示板」ボタンをクリックすると、ドロップダウンメニューが展開 -->

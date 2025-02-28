@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :boards, only: %i[index new create show edit destroy update]
 
+  resources :diagnoses, only: [:new, :create, :show] 
+  
   # ログインページの表示
   # `GET /login` にアクセスすると、`UserSessionsController` の `new` アクションが実行される
   # → ログインフォームを表示

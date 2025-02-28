@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_28_012246) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_28_062124) do
   create_table "boards", charset: "utf8mb4", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
@@ -19,6 +19,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_28_012246) do
     t.datetime "updated_at", null: false
     t.string "board_image"
     t.index ["user_id"], name: "index_boards_on_user_id"
+  end
+
+  create_table "diagnoses", charset: "utf8mb4", force: :cascade do |t|
+    t.string "question1", null: false
+    t.string "question2", null: false
+    t.string "question3", null: false
+    t.string "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|

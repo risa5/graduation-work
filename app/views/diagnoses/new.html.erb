@@ -1,0 +1,20 @@
+<h1>あなたに合った癒しを診断</h1>
+
+<%= form_with model: @diagnosis, url: diagnoses_path, method: :post, local: true, data: { turbo: false }  do |f| %>
+  <div class="mb-3">
+    <%= f.label :question1, "必要なもの" %>
+    <%= f.select :question1, ["リラックスしたい", "エネルギーを取り戻したい"], { prompt: "選択してください" }, class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :question2, "癒しにかけられる時間" %>
+    <%= f.select :question2, ["短時間", "長時間"], { prompt: "選択してください" }, class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :question3, "気分" %>
+    <%= f.select :question3, ["落ち込んでいる", "イライラしている", "頭が疲れている", "身体が疲れている"], { prompt: "選択してください" }, class: "form-select" %>
+  </div>
+
+  <%= f.submit "診断する", class: "btn btn-primary" %>
+<% end %>

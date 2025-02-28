@@ -13,7 +13,9 @@
     <!-- ナビゲーションメニュー（デフォルトは折りたたまれている） -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto main-nav align-items-center">
-      
+      <li class="nav-item">
+        <%= link_to '診断する', new_diagnosis_path, class: "nav-link" %>
+      </li>
       <!-- ログインページへのリンク -->
       <li class="nav-item">
           <%= link_to 'ログイン', login_path, class: "nav-link" %>
