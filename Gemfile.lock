@@ -94,13 +94,12 @@ GEM
     brakeman (7.0.0)
       racc
     builder (3.3.0)
-    carrierwave (2.2.2)
-      activemodel (>= 5.0.0)
-      activesupport (>= 5.0.0)
+    carrierwave (3.1.1)
+      activemodel (>= 6.0.0)
+      activesupport (>= 6.0.0)
       addressable (~> 2.6)
       image_processing (~> 1.1)
       marcel (~> 1.0.0)
-      mini_mime (>= 0.1.3)
       ssrf_filter (~> 1.0)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
@@ -359,7 +358,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap
   brakeman
-  carrierwave (= 2.2.2)
+  carrierwave (= 3.1.1)
   cssbundling-rails
   debug
   error_highlight (>= 0.4.0)
