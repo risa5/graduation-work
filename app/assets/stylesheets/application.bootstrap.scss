@@ -2,12 +2,12 @@
 @use 'bootstrap-icons/font/bootstrap-icons';
 @use 'top';
 
-// ヘッダーの背景色をカスタマイズ
+// ヘッダーの背景色
 header {
-    background-color: #f1f4f8 !important; // 好きな色に変更（例: 青）
+    background-color: #f1f4f8 !important;
   }
   
-  // Bootstrapの `bg-light` を上書き
+  // Bootstrapのbg-lightを上書き
   .navbar {
-    background-color: #f1f4f8 !important; // 好きな色に変更
+    background-color: #f1f4f8 !important;
   }
