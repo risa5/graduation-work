@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :image, length: { maximum: 255 }, allow_blank: true
 
   has_many :boards, dependent: :destroy
+  has_many :diagnosis_records
 
   def own?(object)
     id == object&.user_id
