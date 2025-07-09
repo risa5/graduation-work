@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_05_062152) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_09_143312) do
   create_table "boards", charset: "utf8mb4", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
@@ -71,7 +71,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_05_062152) do
   end
 
   create_table "questions", charset: "utf8mb4", force: :cascade do |t|
-    t.string "fatigue_category", null: false
+    t.integer "fatigue_category", null: false
     t.string "question_content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

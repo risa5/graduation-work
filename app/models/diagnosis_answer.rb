@@ -1,5 +1,5 @@
 class DiagnosisAnswer < ApplicationRecord
-  belongs_to :choices
-  belongs_to :diagnosis_results
-  belongs_to :questions
+  belongs_to :choice
+  belongs_to :diagnosis_result
+  belongs_to :question
 end
