@@ -2,6 +2,8 @@ class DiagnosesController < ApplicationController
 
   skip_before_action :require_login, only: %i[new create show]
 
+  # 診断機能を表示
+  # 
   def new
     @diagnosis = Diagnosis.new
   end
