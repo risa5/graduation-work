@@ -3,9 +3,10 @@ class DiagnosesController < ApplicationController
   skip_before_action :require_login, only: %i[new create show]
 
   # 診断機能を表示
-  # 
+  # Array.new(9)：9つ分の配列を作る
   def new
-    @diagnosis = Diagnosis.new
+    @diagnosis_answers = Array.new(9) {DiagnosisAnswers.new}
+    @diagnosis_record = DiagnosisRecord.new
   end
 
   def create
