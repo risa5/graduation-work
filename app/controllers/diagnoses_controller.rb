@@ -41,7 +41,13 @@ class DiagnosesController < ApplicationController
   private
 
   # ストロングパラメータの定義
-  def diagnosis_params
-    params.require(:diagnosis).permit(:question1, :question2, :question3)
+  # diagnosis_records
+  def diagnosis_record_params
+    params.require(:diagnosis_record).permit(:body_score, :emotion_score, :mind_score)
+  end
+
+  # diagnosis_answers
+  def diagnosis_answer_params
+    params.require(:diagnosis_answer).permit(:diagnosis_record_id, :question_id, :choice_id)
   end
 end
