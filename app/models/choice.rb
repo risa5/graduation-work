@@ -4,4 +4,5 @@ class Choice < ApplicationRecord
   validates :score, presence: true
 
   has_many :diagnosis_answers
+  belongs_to :question
 end

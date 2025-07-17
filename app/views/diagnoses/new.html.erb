@@ -1,20 +1,24 @@
-<h1>あなたにぴったりの癒しを診断</h1>
+<h2>癒し方法診断</h2>
 
-<%= form_with model: @diagnosis, url: diagnoses_path, method: :post, local: true, data: { turbo: false }  do |f| %>
-  <div class="mb-3">
-    <%= f.label :question1, "必要なもの" %>
-    <%= f.select :question1, ["リラックスしたい", "エネルギーを取り戻したい"], { prompt: "選択してください" }, class: "form-select" %>
-  </div>
+<%= form_with model: @diagnosis_record, url: diagnoses_path, local: true, data: { turbo: false } do |f| %>
+  <% @questions.each_with_index do |question, index| %>
+    <div class="question-block">
+      <p><strong><%= question.question_content %></strong></p>
 
-  <div class="mb-3">
-    <%= f.label :question2, "癒しにかけられる時間" %>
-    <%= f.select :question2, ["短時間", "長時間"], { prompt: "選択してください" }, class: "form-select" %>
-  </div>
+      <% answer = @diagnosis_record.try(:diagnosis_answers).try(:[], index) || DiagnosisAnswer.new %>
+      <%= f.fields_for :diagnosis_answers, answer, child_index: index do |a| %>
+        <%= a.hidden_field :question_id, value: question.id %>
 
-  <div class="mb-3">
-    <%= f.label :question3, "気分" %>
-    <%= f.select :question3, ["落ち込んでいる", "イライラしている", "頭が疲れている", "身体が疲れている"], { prompt: "選択してください" }, class: "form-select" %>
-  </div>
+        <% question.choices.each do |choice| %>
+          <label>
+            <%= a.radio_button :choice_id, choice.id %>
+            <%= choice.choice_content %>
+          </label><br>
+        <% end %>
+      <% end %>
+    </div>
+    <hr>
+  <% end %>
 
-  <%= f.submit "診断する", class: "btn btn-primary" %>
+  <%= f.submit "診断結果を表示", class: "btn btn-primary" %>
 <% end %>
