@@ -56,7 +56,7 @@ class DiagnosesController < ApplicationController
 
   redirect_to diagnosis_path(@diagnosis_record)
 rescue => e
-  flash.now[:alert] = "診断の保存に失敗しました: #{e.message}"
+  flash.now[:alert] = "診断に失敗しました: #{e.message}"
   @questions = Question.includes(:choices).all
   @diagnosis_record ||= DiagnosisRecord.new
   @questions.each { @diagnosis_record.diagnosis_answers.build }
