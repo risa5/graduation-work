@@ -3,6 +3,6 @@ class Question < ApplicationRecord
   validates :question_content, presence: true, length: { maximum: 255 }
   enum fatigue_category: { body: 1, emotion: 2, mind: 3 }
   
-  belongs_to :diagnosis_result
+  belongs_to :diagnosis_result, optional: true
   has_many :choices
 end
