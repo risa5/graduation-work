@@ -1,5 +1,9 @@
-<h1>診断結果</h1>
-<p><%= @diagnosis_result.result_summary %></p>
-<p><strong>具体的な癒し方法</strong> <%= simple_format(@diagnosis_result.suggestion) %></p>
-<%= link_to 'トップへ戻る', root_path, class: 'btn btn-primary' %>
-<%= link_to "もう一度診断する", new_diagnosis_path, class: "btn btn-secondary mt-3" %>
+<h2>診断結果</h2>
+
+<p><strong>パターン：</strong><%= @diagnosis_result.pattern_code %></p>
+<p><strong>要約：</strong> <%= @diagnosis_result.result_summary %></p>
+
+<h3>おすすめケア</h3>
+<p><%= simple_format(@diagnosis_result.suggestion) %></p>
+
+<%= link_to "もう一度診断する", new_diagnosis_path, class: "btn btn-secondary" %>

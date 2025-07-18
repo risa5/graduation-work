@@ -1,14 +1,17 @@
 <h2>癒し方法診断</h2>
 
-<%= form_with model: @diagnosis_record, url: diagnoses_path, local: true, data: { turbo: false } do |f| %>
-  <% @questions.each_with_index do |question, index| %>
+<%= form_with model: @diagnosis_record,
+              url:   diagnoses_path,
+              local: true,
+              html:  { "data-turbo" => false } do |f| %>
+  <% @questions.each_with_index do |question, idx| %>
     <div class="question-block">
+      <!-- 質問文 -->
       <p><strong><%= question.question_content %></strong></p>
 
-      <% answer = @diagnosis_record.try(:diagnosis_answers).try(:[], index) || DiagnosisAnswer.new %>
-      <%= f.fields_for :diagnosis_answers, answer, child_index: index do |a| %>
+      <!-- nested_fields_for -->
+      <%= f.fields_for :diagnosis_answers, @diagnosis_record.diagnosis_answers[idx] do |a| %>
         <%= a.hidden_field :question_id, value: question.id %>
-
         <% question.choices.each do |choice| %>
           <label>
             <%= a.radio_button :choice_id, choice.id %>

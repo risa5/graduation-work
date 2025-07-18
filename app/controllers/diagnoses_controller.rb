@@ -1,67 +1,58 @@
+# app/controllers/diagnoses_controller.rb
 class DiagnosesController < ApplicationController
+  # これでログインしていなくても new/create/show が使えます
   skip_before_action :require_login, only: %i[new create show]
 
   def new
-    @diagnosis_record = DiagnosisRecord.new
+    # 質問を全件、選択肢込みで取得
     @questions = Question.includes(:choices).all
-    @questions.each do |_q|
-      @diagnosis_record.diagnosis_answers.build
-    end
+    # レコードと answer の数だけダミーを build
+    @diagnosis_record = DiagnosisRecord.new
+    @questions.each { @diagnosis_record.diagnosis_answers.build }
   end
 
-  def create
-    submitted_answers = diagnosis_record_params[:diagnosis_answers_attributes]
+def create
+  # ネストされた answers ハッシュを取り出す
+  answers = diagnosis_record_params[:diagnosis_answers_attributes]
 
-    body_score = 0
-    emotion_score = 0
-    mind_score = 0
+  # 各カテゴリのスコアを計算（配列化して渡す）
+  body_score    = calculate_score(answers.values, "body")
+  emotion_score = calculate_score(answers.values, "emotion")
+  mind_score    = calculate_score(answers.values, "mind")
 
-    diagnosis_answers = submitted_answers.map do |_, answer|
-      question = Question.find(answer[:question_id])
-      choice = Choice.find(answer[:choice_id])
+  # パターンコードを決定して master テーブルから結果を取得
+  pattern_code     = determine_pattern_code(body_score, emotion_score, mind_score)
+  diagnosis_result = DiagnosisResult.find_by!(pattern_code: pattern_code)
 
-      case question.fatigue_category
-      when "body"
-        body_score += choice.score
-      when "emotion"
-        emotion_score += choice.score
-      when "mind"
-        mind_score += choice.score
-      end
+  # レコード本体を組み立て
+  @diagnosis_record = DiagnosisRecord.new(
+    body_score:       body_score,
+    emotion_score:    emotion_score,
+    mind_score:       mind_score,
+    diagnosis_result: diagnosis_result,
+    user:             current_user  # nil でも OK（optional: true）
+  )
 
-      DiagnosisAnswer.new(
-        question_id: question.id,
-        choice_id: choice.id
-      )
-    end
-
-    diagnosis_result = DiagnosisResult.find_by_pattern_code(
-      determine_pattern_code(body_score, emotion_score, mind_score)
+  # nested answers を build
+  answers.values.each do |ans|
+    @diagnosis_record.diagnosis_answers.build(
+      question_id: ans["question_id"],
+      choice_id:   ans["choice_id"]
     )
-
-    DiagnosisRecord.transaction do
-      @diagnosis_record = DiagnosisRecord.create!(
-        body_score: body_score,
-        emotion_score: emotion_score,
-        mind_score: mind_score,
-        diagnosis_result_id: diagnosis_result.id,
-        user_id: current_user&.id
-      )
-
-    diagnosis_answers.each do |answer|
-      answer.diagnosis_record_id = @diagnosis_record.id
-      answer.save!
-    end
   end
 
-  redirect_to diagnosis_path(@diagnosis_record)
-rescue => e
-  flash.now[:alert] = "診断に失敗しました: #{e.message}"
+  if @diagnosis_record.save
+    redirect_to diagnosis_path(@diagnosis_record)
+  else
+    @questions = Question.includes(:choices).all
+    render :new, status: :unprocessable_entity
+  end
+rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotFound => e
+  Rails.logger.error "診断作成エラー: #{e.class} - #{e.message}"
   @questions = Question.includes(:choices).all
-  @diagnosis_record ||= DiagnosisRecord.new
-  @questions.each { @diagnosis_record.diagnosis_answers.build }
   render :new, status: :unprocessable_entity
 end
+
 
   def show
     @diagnosis_record = DiagnosisRecord.find(params[:id])
@@ -70,39 +61,42 @@ end
 
   private
 
-  def determine_pattern_code(body, emotion, mind)
-    scores = { body: body, emotion: emotion, mind: mind }
-
-    return "all_equal" if scores.values.uniq == [0]
-
-    max_score = scores.values.max
-    max_categories = scores.select { |_, v| v == max_score }.keys
-
-    case max_categories
-    when [:body]
-      "body_only"
-    when [:emotion]
-      "emotion_only"
-    when [:mind]
-      "mind_only"
-    when [:body, :emotion]
-      "body_emotion"
-    when [:mind, :emotion]
-      "mind_emotion"
-    when [:body, :mind]
-      "body_mind"
-    when [:body, :emotion, :mind]
-      "all_equal"
-    else
-      "unknown"
-    end
-  end
- 
-  private
-
+  # params の許可
   def diagnosis_record_params
     params.require(:diagnosis_record).permit(
       diagnosis_answers_attributes: [:question_id, :choice_id]
     )
+  end
+
+  # 各カテゴリの合計スコアを計算
+  def calculate_score(answers, category)
+    answers.sum do |ans|
+      choice   = Choice.find(ans["choice_id"])
+      # fatigue_category は "body","emotion","mind" の文字列を返す enum
+      choice.question.fatigue_category == category ? choice.score : 0
+    end
+  end
+  
+  # それぞれの値からパターンコードを返す
+  def determine_pattern_code(body, emotion, mind)
+    if body.zero? && emotion.zero? && mind.zero?
+      "疲労なし"
+    elsif body == emotion && emotion == mind
+      "身体と心と脳の疲労"
+    elsif body > emotion && body > mind
+      "身体の疲労"
+    elsif emotion > body && emotion > mind
+      "心の疲労"
+    elsif mind > body && mind > emotion
+      "脳の疲労"
+    elsif body == emotion && body > mind
+      "身体と心の疲労"
+    elsif body == mind && body > emotion
+      "身体と脳の疲労"
+    elsif emotion == mind && emotion > body
+      "心と脳の疲労"
+    else
+      "疲労なし"
+    end
   end
 end
