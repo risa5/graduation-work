@@ -25,7 +25,7 @@ gem 'sorcery', github: "Sorcery/sorcery"
 
 gem "bcrypt", "~> 3.1.7"
 
-gem 'carrierwave', '2.2.2'
+gem 'carrierwave', '3.1.2'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
