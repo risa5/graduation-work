@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :diagnosis_records
   has_many :comments, dependent: :destroy
 
+  #　ログインしているuserのIDとオブジェクトのuserIDが一致するか確認するメソッド 
   def own?(object)
     id == object&.user_id
   end
