@@ -12,25 +12,31 @@
               <h3 style="display: inline;"><%= @board.title %></h3>
               <ul class="list-inline">
                 <li class="list-inline-item"><%= "by #{@board.user.name}" %></li>
-                <li class="list-inline-item"><%= l @board.created_at, format: :long %></li>
+                <li class="list-inline-item"><%= @board.created_at.strftime("%Y/%m/%d %H:%M") %></li>
               </ul>
-              <% if current_user.own?(@board) %>
               <div class='d-flex justify-content-end'>
-                <!-- 編集ボタン -->
-                <%= link_to edit_board_path(@board), id: "button-edit-#{@board.id}", class: "me-2 text-primary" do %>
-                  <i class="bi bi-pencil-fill"></i>
+                <%= link_to "#", id: "button-edit-#{@board.id}" do %>
+                  <i class='bi bi-pencil-fill'></i>
                 <% end %>
-            
-                <!-- 削除ボタン -->
-                <%= button_to board_path(@board), method: :delete, data: { turbo: false, confirm: t('defaults.delete_confirm') }, class: "btn btn-link p-0 border-0 text-danger d-flex align-items-center" do %>
+                <%= link_to "#", id: "button-delete-#{@board.id}", class: "ms-2" do %>
                   <i class="bi bi-trash-fill"></i>
                 <% end %>
               </div>
-            <% end %>
+              </div>
             </div>
             <p><%= simple_format(@board.body) %></p>
           </div>
         </article>
+      </div>
+    </div>
+    <%= render 'comments/form', comment: @comment, board: @board %>
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <table class="table">
+          <tbody id="table-comment">
+            <%= render @comments %>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
