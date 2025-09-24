@@ -3,7 +3,7 @@
     <%= image_tag "sample", width: "50", height: "50", class: "rounded-circle" %>
   </td>
   <td>
-    <h3 class="small"><%= comment.user.decorate.full_name %></h3>
+    <h3 class="small"><%= comment.user.name %></h3>
     <p><%= simple_format(comment.body) %></p>
   </td>
   <% if current_user.own?(comment) %>

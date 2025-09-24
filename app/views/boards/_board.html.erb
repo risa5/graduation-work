@@ -23,7 +23,7 @@
         </div>
         <ul class="list-inline mt-2 mb-1">
           <li><i class="bi bi-person"></i> <%= board.user.name %></li>
-          <li><i class="bi bi-calendar"></i> <%= l board.created_at, format: :short %></li>
+          <li><i class="bi bi-calendar"></i> <%= board.created_at.strftime("%Y/%m/%d %H:%M") %></li>
         </ul>
         <p class="card-text"><%= board.body %></p>
       </div>
