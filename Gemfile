@@ -20,6 +20,7 @@ gem "cssbundling-rails"
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
+gem 'ransack', '4.2'
 
 gem 'sorcery', github: "Sorcery/sorcery"
 
