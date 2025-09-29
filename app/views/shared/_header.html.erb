@@ -38,9 +38,12 @@
           <div class='dropdown-menu dropdown-menu-end'>
             <div class='dropdown-item'><%= current_user.name %></div>
             <div class='dropdown-divider'></div>
+            <!-- ブックマークページへのリンク -->
+            <%= link_to t('header.bookmark_index'), bookmarks_boards_path, class: 'nav-link' %>
             <!-- ログアウトボタン -->
             <%= form_with url: logout_path, method: :delete, data: { turbo: false } do %>
               <%= submit_tag "ログアウト", class: "btn btn-danger" %>
+
             <% end %>
           </div>
         </li>
