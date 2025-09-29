@@ -1,7 +1,7 @@
 class BoardsController < ApplicationController
   def index
     @q = Board.ransack(params[:q])
-    @boards = @q.result(distinct: true).includes(:user).order(created_at: :desc)
+    @boards = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -42,6 +42,11 @@ class BoardsController < ApplicationController
     board = current_user.boards.find(params[:id])
     board.destroy!
     redirect_to boards_path, success: '削除に成功しました', status: :see_other
+  end
+
+  def bookmarks
+    @q = current_user.bookmark_boards.ransack(params[:q])
+    @bookmark_boards = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   private

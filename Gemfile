@@ -22,6 +22,10 @@ gem "jbuilder"
 # gem "redis", ">= 4.0.1"
 gem 'ransack', '4.2'
 
+gem 'kaminari', '1.2.2'
+
+gem 'bootstrap5-kaminari-views'
+
 gem 'sorcery', github: "Sorcery/sorcery"
 
 gem "bcrypt", "~> 3.1.7"
