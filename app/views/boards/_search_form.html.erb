@@ -1,6 +1,20 @@
-<%= search_form_for q, url: url do |f| %>
-  <div class="input-group mb-3">
-    <%= f.search_field :title_or_body_cont, class: 'form-control', placeholder: t('defaults.search_word') %>
+
+<%= search_form_for q, url: url, method: :get do |f| %>
+  <div class="input-group mb-3 position-relative"
+       data-controller="autocomplete"
+       data-autocomplete-url-value="<%= autocomplete_boards_path %>"
+       role="combobox">
+
+    <input type="text"
+           name="q[title_or_body_cont]"
+           class="form-control"
+           placeholder="<%= t('defaults.search_word') %>"
+           data-autocomplete-target="input" />
+
+    <ul class="list-group position-absolute w-100"
+        style="z-index:1000; max-height: 10rem; overflow-y: scroll;"
+        data-autocomplete-target="results"></ul>
+
     <div class="input-group-append">
       <%= f.submit class: 'btn btn-primary' %>
     </div>

@@ -12,13 +12,13 @@
         <% if @boards.present? %>
           <%= render @boards %>
         <% else %>
-          <div class="mb-3">掲示板がありません</div>
+          <div class="mb-3">投稿がありません</div>
         <% end %>
       </div>
       <div class="text-muted small">
-        total_count: <%= @boards.total_count %>,
-        total_pages: <%= @boards.total_pages %>,
-        current_page: <%= @boards.current_page %>
+        投稿件数 : <%= @boards.total_count %>,
+        総ページ数: <%= @boards.total_pages %>,
+        現在のページ: <%= @boards.current_page %>
       </div>
       <%= paginate @boards, theme: 'bootstrap-5' %>
     </div>

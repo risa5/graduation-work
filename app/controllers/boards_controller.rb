@@ -49,6 +49,14 @@ class BoardsController < ApplicationController
     @bookmark_boards = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
   end
 
+  def autocomplete
+    term = params[:q].to_s.strip
+    return render inline: "" if term.length < 1
+    scope = Board.ransack(title_or_body_cont: term).result
+    labels = scope.limit(20).map { |b| b.title.presence || b.body.to_s.truncate(30) }.reject(&:blank?).uniq.first(10)
+    render partial: "boards/autocomplete", formats: :html, locals: { labels: labels }
+  end
+
   private
 
   def board_params
