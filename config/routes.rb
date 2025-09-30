@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create edit destroy], shallow: true
     collection do
       get :bookmarks
+      get :autocomplete
     end
   end
   # 診断機能

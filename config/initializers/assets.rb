@@ -7,7 +7,11 @@ Rails.application.config.assets.version = "1.0"
 # Rails.application.config.assets.paths << Emoji.images_path
 Rails.application.config.assets.paths << Rails.root.join("node_modules/bootstrap-icons/font")
 
+# ✅ jsbundling-rails（esbuild/webpack）でビルドしたJSをSprocketsに認識させるために必要
+Rails.application.config.assets.paths << Rails.root.join("app/assets/builds")
+
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w[ admin.js admin.css ]
+

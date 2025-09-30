@@ -16,6 +16,7 @@
     <%= stylesheet_link_tag "application" %>
     <!-- JavaScriptの読み込み（Turbolinks用・再読み込みが必要な場合に適用） -->
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body>
