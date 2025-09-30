@@ -17,3 +17,7 @@ header {
     width: 100px;
     height: auto; 
   }
+
+  #header-profile.dropdown-toggle::after {
+  display: none !important;
+}
