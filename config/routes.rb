@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # 診断機能
   resources :bookmarks, only: %i[create destroy]
   resources :diagnoses, only: %i[new create show]
+  resource :profile, only: %i[show edit update]
 
   get    "login",  to: "user_sessions#new"
   post   "login",  to: "user_sessions#create"
