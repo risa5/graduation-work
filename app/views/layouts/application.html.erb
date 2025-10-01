@@ -28,6 +28,7 @@
       <!-- 未ログインならログイン前用のヘッダーを表示 -->
       <%= render 'shared/before_login_header' %>
     <% end %>
+    <%= render 'shared/flash_message' %>
     <!-- 各ページのコンテンツが挿入される部分（ビューの内容を表示） -->
     <%= yield %>
     <!-- フッターの表示 -->

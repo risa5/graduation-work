@@ -14,16 +14,17 @@ class UserSessionsController < ApplicationController
 
     if @user
       # ログイン成功時はトップページへリダイレクト
-      redirect_to root_path
+      redirect_to root_path, success: 'ログインしました'
     else
       # ログイン失敗時は `new.html.erb` を再表示（エラーメッセージを表示できる）
-      render :new
+      flash.now[:danger] = 'ログインに失敗しました'
+      render :new, status: :unprocessable_entity
     end
   end
 
   # ログアウト処理を行うアクション
   def destroy
     logout
-    redirect_to root_path, status: :see_other , notice: 'ログアウトしました'
+    redirect_to root_path, status: :see_other, success: t('user_sessions.destroy.success')
   end
 end
