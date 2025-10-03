@@ -6,13 +6,14 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
   validates :name, presence: true, length: { maximum: 255 }
   validates :email, presence: true, uniqueness: true
-  validates :image, length: { maximum: 255 }, allow_blank: true
 
   has_many :boards, dependent: :destroy
   has_many :diagnosis_records
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_boards, through: :bookmarks, source: :board
+
+  mount_uploader :image, ImageUploader
 
   #　ログインしているuserのIDとオブジェクトのuserIDが一致するか確認するメソッド 
   def own?(object)
