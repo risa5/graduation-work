@@ -15,7 +15,7 @@
       <span class='navbar-toggler-icon'></span>
     </button>
 
-    <!-- ナビゲーションメニュー（PCでは通常表示、スマホでは折りたたみ可能） -->
+    <!-- ナビゲーションメニュー -->
     <div class='collapse navbar-collapse' id='navbarSupportedContent'>
       <ul class='navbar-nav ms-auto main-nav align-items-center'>
 
@@ -28,24 +28,22 @@
           <!-- 「掲示板」ボタン -->
           <%= link_to '掲示板',
                       '#',
-                      class: 'nav-link dropdown-toggle',            # ← 既存維持
-                      role: 'button',                                # ← 追加：アクセシビリティ補助
+                      class: 'nav-link dropdown-toggle',
+                      role: 'button',
                       data: { bs_toggle: 'dropdown' },
                       aria: { haspopup: 'true', expanded: 'false' },
                       id: 'header-board-menu' %>
           <div class='dropdown-menu dropdown-menu-end'
-               aria-labelledby='header-board-menu'>                  <!-- ← 追加：関連付け -->
+               aria-labelledby='header-board-menu'>
             <%= link_to '掲示板一覧', boards_path , class: 'dropdown-item' %>
             <%= link_to '掲示板作成', new_board_path , class: 'dropdown-item' %>
           </div>
         </li>
 
-        <!-- ユーザープロフィール（ドロップダウン） -->
         <li class='nav-item dropdown dropdown-slide'>
-          <!-- アイコン（トグル要素は <a> に。dropdown-toggle を付与） -->
           <%= link_to '#',
-                      class: 'nav-link dropdown-toggle p-0 d-flex align-items-center',  # ← 変更：dropdown-toggle を付与
-                      role: 'button',                                                   # ← 追加
+                      class: 'nav-link dropdown-toggle p-0 d-flex align-items-center',
+                      role: 'button',                                                  
                       data: { bs_toggle: 'dropdown' },
                       aria: { haspopup: 'true', expanded: 'false' },
                       id: 'header-profile' do %>
@@ -53,13 +51,11 @@
           <% end %>
 
           <div class='dropdown-menu dropdown-menu-end'
-               aria-labelledby='header-profile'>                     <!-- ← 追加：関連付け -->
+               aria-labelledby='header-profile'> 
             <div class='dropdown-item'><%= current_user.name %></div>
             <div class='dropdown-divider'></div>
             <%= link_to t('header.profile'), profile_path , class: 'dropdown-item' %>
-            <!-- ブックマークページへのリンク（見た目のみ調整：nav-link → dropdown-item） -->
             <%= link_to t('header.bookmark_index'), bookmarks_boards_path, class: 'dropdown-item' %>
-            <!-- ログアウトボタン（機能は変更せずそのまま） -->
             <%= form_with url: logout_path, method: :delete, data: { turbo: false } do %>
               <%= submit_tag "ログアウト", class: "btn btn-danger" %>
             <% end %>
