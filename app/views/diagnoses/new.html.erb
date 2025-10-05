@@ -1,4 +1,5 @@
-<h2>癒し方法診断</h2>
+<% content_for(:title, t('.title')) %>
+<h1><%= t('.title') %></h1>
 
 <%= form_with model: @diagnosis_record,
               url:   diagnoses_path,
