@@ -53,8 +53,8 @@
           <% end %>
 
           <div class='dropdown-menu dropdown-menu-end'
-               aria-labelledby='header-profile'>                     <!-- ← 追加：関連付け -->
-            <div class='dropdown-item'><%= current_user.name %></div>
+               aria-labelledby='header-profile'> 
+            <div class='dropdown-item'><%= link_to current_user.name , profile_path, class: 'dropdown-item' %></div>
             <div class='dropdown-divider'></div>
             <!-- ブックマークページへのリンク（見た目のみ調整：nav-link → dropdown-item） -->
             <%= link_to t('header.bookmark_index'), bookmarks_boards_path, class: 'dropdown-item' %>
@@ -64,7 +64,6 @@
             <% end %>
           </div>
         </li>
-
       </ul>
     </div>
   </nav>
