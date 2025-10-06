@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       board: 掲示板
       comment: コメント
+      diagnose: 診断
     attributes:
       user:
         email: メールアドレス
@@ -19,6 +20,7 @@ ja:
         user: 作成者
       comment:
         body: コメント
+      diagnose:
   attributes:
     id: ID
     created_at: 作成日時
