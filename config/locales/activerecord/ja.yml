@@ -4,13 +4,12 @@ ja:
       user: ユーザー
       board: 掲示板
       comment: コメント
+      diagnose: 診断
     attributes:
       user:
         email: メールアドレス
-        last_name: 姓
-        first_name: 名
-        full_name: 氏名
-        avatar: アバター
+        name: 名前
+        avatar: アイコン
         password: パスワード
         password_confirmation: パスワード確認
         role: 権限
@@ -21,6 +20,7 @@ ja:
         user: 作成者
       comment:
         body: コメント
+      diagnose:
   attributes:
     id: ID
     created_at: 作成日時

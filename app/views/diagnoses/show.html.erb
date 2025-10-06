@@ -1,4 +1,5 @@
-<h2>診断結果</h2>
+<% content_for(:title, t('.title')) %>
+<h1><%= t('.title') %></h1>
 
 <p><strong>パターン：</strong><%= @diagnosis_result.pattern_code %></p>
 <p><strong>要約：</strong> <%= @diagnosis_result.result_summary %></p>

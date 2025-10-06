@@ -3,8 +3,8 @@
   <head>
     <!-- ファビコン設定 -->
     <%= favicon_link_tag('favicon.ico') %>
-    <!-- ページタイトル（ブラウザのタブに表示される） -->
-    <title>HealScan</title>
+    <!-- ページタイトル -->
+    <title><%= page_title(yield(:title)) %></title>
     <!-- レスポンシブデザインを有効化（スマホ・タブレット対応） -->
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <!-- CSRF（クロスサイトリクエストフォージェリ）対策用のメタタグ -->

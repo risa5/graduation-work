@@ -68,6 +68,11 @@ ja:
       success: ブックマークしました
     destroy:
       success: ブックマークを外しました
+  diagnoses:
+    new:
+      title: 診断
+    show:
+      title: 診断結果
   profiles:
     show:
       title: プロフィール
