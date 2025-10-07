@@ -16,4 +16,7 @@ Rails.application.routes.draw do
   get    "login",  to: "user_sessions#new"
   post   "login",  to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy", as: :logout
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  
 end
