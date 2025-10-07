@@ -34,6 +34,11 @@ gem "bcrypt", "~> 3.1.7"
 
 gem 'carrierwave', '2.2.2'
 
+gem 'letter_opener_web', '2.0.0'
+
+gem 'config'
+
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
