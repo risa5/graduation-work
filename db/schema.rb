@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_07_143731) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_11_133724) do
   create_table "boards", charset: "utf8mb4", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
@@ -90,6 +90,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_07_143731) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "likes", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "board_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_likes_on_board_id"
+    t.index ["user_id", "board_id"], name: "index_likes_on_user_id_and_board_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "questions", charset: "utf8mb4", force: :cascade do |t|
     t.integer "fatigue_category", null: false
     t.string "question_content", null: false
@@ -124,4 +134,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_07_143731) do
   add_foreign_key "diagnosis_answers", "questions"
   add_foreign_key "diagnosis_records", "diagnosis_results"
   add_foreign_key "diagnosis_records", "users"
+  add_foreign_key "likes", "boards"
+  add_foreign_key "likes", "users"
 end
