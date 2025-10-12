@@ -23,6 +23,18 @@
                   <%= link_to board_path(@board), id: "button-delete-#{@board.id}", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
                     <i class="bi bi-trash-fill"></i>
                   <% end %>
+                  <!-- いいね機能 -->
+                  <% if current_user.likes.exists?(board: @board) %>
+                    <%= link_to board_like_path(@board), data: { turbo_method: :delete } do %>
+                      <i class="bi bi-heart-fill"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to board_like_path(@board), data: { turbo_method: :post } do %>
+                      <i class="bi bi-heart"></i>
+                    <% end %>
+                  <% end %>
+                  <!-- いいね数表示 -->
+                  <%= @board.likes.count %>
                 </div>
               <% end %>
             </div>
