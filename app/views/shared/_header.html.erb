@@ -19,6 +19,20 @@
     <div class='collapse navbar-collapse' id='navbarSupportedContent'>
       <ul class='navbar-nav ms-auto main-nav align-items-center'>
 
+      <%# 管理者だけに管理メニューを表示 %>
+        <% if current_user&.admin? %>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          管理者用メニュー
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
+            <li><%= link_to "ユーザーアカウントのCRUD", admin_users_path, class: "dropdown-item" %></li>
+            <li><%= link_to "投稿のCRUD", admin_boards_path, class: "dropdown-item" %></li>
+          </ul>
+          </li>
+        <% end %>
+
         <li class="nav-item">
           <%= link_to '診断する', new_diagnosis_path, class: "nav-link" %>
         </li>
