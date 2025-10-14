@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get :autocomplete
     end
   end
-  # 診断機能
+
   resources :bookmarks, only: %i[create destroy]
   resources :diagnoses, only: %i[new create show]
   resource :profile, only: %i[show edit update]
@@ -17,6 +17,13 @@ Rails.application.routes.draw do
   get    "login",  to: "user_sessions#new"
   post   "login",  to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy", as: :logout
+
+  # 管理者権限用
+  namespace :admin do
+    root to: "dashboards#show"
+    resources :boards
+    resources :users
+  end
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
