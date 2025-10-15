@@ -38,6 +38,8 @@ gem 'letter_opener_web', '2.0.0'
 
 gem 'config'
 
+gem 'enum_help', '0.0.19'
+
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

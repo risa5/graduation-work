@@ -1,0 +1,36 @@
+<% content_for(:title, t('.title')) %>
+<div class="container mb-5 pt-2">
+  <h1><%= t('.title') %></h1>
+  <div class="row">
+    <span class="border border-dark">
+      <div class="col-md-12 mb-3">
+        <%= render 'search_form' %>
+      </div>
+    </span>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col"><%= "ID" %></th>
+          <th scope="col"><%= "名前" %></th>
+          <th scope="col"><%= "権限" %></th>
+          <th scope="col"><%= "作成日" %></th>
+          <th scope="col"><%= "更新日" %></th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render @users %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- ページネーション -->
+      <%= paginate @users, theme: 'bootstrap-5' %>
+    </div>
+  </div>
+</div>
