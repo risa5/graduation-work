@@ -1,6 +1,7 @@
 <tr id="comment-<%= comment.id %>">
   <td style="width: 60px">
-    <%= image_tag "sample", width: "50", height: "50", class: "rounded-circle" %>
+    <!-- image_tag "sample", width: "50", height: "50", class: "rounded-circle" -->
+    <%= image_tag comment.user.image_url, class: 'rounded-circle', size: '50x50' %>
   </td>
   <td>
     <h3 class="small"><%= "User：#{comment.user.name}" %></h3>

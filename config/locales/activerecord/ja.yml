@@ -9,7 +9,7 @@ ja:
       user:
         email: メールアドレス
         name: 名前
-        avatar: アイコン
+        image: アイコン
         password: パスワード
         password_confirmation: パスワード確認
         role: 権限
