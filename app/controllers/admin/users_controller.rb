@@ -4,6 +4,12 @@ class Admin::UsersController < ApplicationController
   def index
     @q = User.ransack(params[:q])
     @users = @q.result(distinct: true).order(created_at: :asc).page(params[:page])
-    # @users = User.order(created_at: :asc).page(params[:page])
   end
+
+  def show
+    @user = User.find(params[:id])
+  end
+
+  def edit; end
+
 end
