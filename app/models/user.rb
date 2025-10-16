@@ -19,6 +19,8 @@ class User < ApplicationRecord
 
   enum role: { general: 0, admin: 1 }
 
+  paginates_per 20
+  
   def self.ransackable_attributes(_auth_object = nil)
     ["name", "role"]
   end
