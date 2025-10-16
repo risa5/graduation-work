@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update]
+  before_action :set_user, only: %i[show edit update destroy]
 
   def index
     @q = User.ransack(params[:q])
@@ -24,10 +24,16 @@ class Admin::UsersController < ApplicationController
   end
 
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy!
+    redirect_to admin_users_path, success: '削除に成功しました', status: :see_other
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:email, :name, :image, :image_cache)
+    params.require(:user).permit(:email, :name, :role, :image, :image_cache)
   end
 
   def set_user
