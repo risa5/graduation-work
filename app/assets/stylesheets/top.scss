@@ -24,3 +24,21 @@
     }
   }
 }
+
+.admin-wrapper {
+    background-image: url('admin.jpg');
+    height: calc(100vh - 134px);
+    position: relative;
+    background-position: center;
+    
+    .admin-inner-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+      font-size: 3rem;
+      color: white;
+    }
+  }

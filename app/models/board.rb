@@ -16,5 +16,5 @@ class Board < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["bookmarks", "comments", "user"]
-  end  
-end  
+  end
+end

@@ -14,11 +14,20 @@ class UserSessionsController < ApplicationController
 
     if @user
       # ログイン成功時はトップページへリダイレクト
-      redirect_to root_path, success: 'ログインしました'
+      redirect_to user_role_path(@user), success: 'ログインしました'
     else
       # ログイン失敗時は `new.html.erb` を再表示（エラーメッセージを表示できる）
       flash.now[:danger] = 'ログインに失敗しました'
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def user_role_path(user)
+    case user.role
+    when 'admin'
+      admin_root_path
+    when 'general'
+      root_path
     end
   end
 

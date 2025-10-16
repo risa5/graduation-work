@@ -17,6 +17,18 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  enum role: { general: 0, admin: 1 }
+
+  paginates_per 20
+  
+  def self.ransackable_attributes(_auth_object = nil)
+    ["name", "role"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["name", "role"]
+  end
+
   #　ログインしているuserのIDとオブジェクトのuserIDが一致するか確認するメソッド 
   def own?(object)
     id == object&.user_id
