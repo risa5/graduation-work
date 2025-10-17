@@ -1,11 +1,17 @@
-<%= search_form_for @q, url: admin_users_path do |f| %>
+<%= search_form_for @q, url: admin_boards_path do |f| %>
   <div class="row">
     <div class="d-flex align-items-center justify-content-center">
       <div class="d-inline me-3">
-        <%= f.search_field :name_cont, class: 'form-control', placeholder: "検索キーワード" %>
+        <%= f.search_field :title_cont, class: 'form-control', placeholder: "本文検索" %>
       </div>
       <div class="d-inline me-3">
-        <%= f.select :role_eq, User.roles_i18n.invert.map{|key, value| [key, User.roles[value]]}, { include_blank: "指定なし" }, { class: 'form-control mr-1' } %>
+        <%= f.search_field :body_cont, class: 'form-control', placeholder: "タイトル検索" %>
+      </div>
+      <div class="d-inline me-3">
+        <%= f.date_field :created_at_gteq %>
+      </div>
+      <div class="d-inline me-3">
+        <%= f.date_field :created_at_lteq %>
       </div>
       <%= f.submit class: 'btn btn-primary' %>
     </div>

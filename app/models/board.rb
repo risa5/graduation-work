@@ -11,7 +11,7 @@ class Board < ApplicationRecord
   mount_uploader :board_image, BoardImageUploader
 
   def self.ransackable_attributes(_auth_object = nil)
-    %w[title body]
+    ["title", "body", "created_at","updated_at"]
   end
 
   def self.ransackable_associations(auth_object = nil)

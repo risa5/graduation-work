@@ -1,0 +1,25 @@
+<tr>
+  <td>
+    <%= board.id %>
+  <td>
+    <%= image_tag board.board_image_url, class: 'img-rounded img-responsive', size: '50x50' %>
+  </td>
+  </td>
+  <td>
+    <%= board.title %>
+  </td>
+  <td>
+    <%= board.body %>
+  </td>
+  <td>
+    <%= l board.created_at, format: :long %>
+  </td>
+  <td>
+    <%= l board.updated_at, format: :long %>
+  </td>
+  <td>
+    <%= link_to "詳細", "#", class: 'btn btn-outline-info' %>
+    <%= link_to "編集", "#", class: 'btn btn-outline-success' %>
+    <%= link_to "削除", "#", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: 'btn btn-outline-danger' %>
+  </td>
+</tr>
