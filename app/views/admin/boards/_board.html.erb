@@ -18,8 +18,8 @@
     <%= l board.updated_at, format: :long %>
   </td>
   <td>
-    <%= link_to "詳細", "#", class: 'btn btn-outline-info' %>
-    <%= link_to "編集", "#", class: 'btn btn-outline-success' %>
+    <%= link_to "詳細", admin_board_path(board), class: 'btn btn-outline-info' %>
+    <%= link_to "編集", edit_admin_board_path(board), class: 'btn btn-outline-success' %>
     <%= link_to "削除", admin_board_path(board), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: 'btn btn-outline-danger' %>
   </td>
 </tr>
