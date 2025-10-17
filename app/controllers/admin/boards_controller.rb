@@ -1,4 +1,4 @@
-class Admin::BoardsController < BaseController
+class Admin::BoardsController < ApplicationController
   before_action :require_admin!
 
   def index
