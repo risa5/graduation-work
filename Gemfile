@@ -40,6 +40,9 @@ gem 'config'
 
 gem 'enum_help', '0.0.19'
 
+gem 'mini_magick'
+
+gem 'meta-tags', require: 'meta_tags'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
