@@ -1,39 +1,33 @@
-# app/controllers/diagnoses_controller.rb
 class DiagnosesController < ApplicationController
-  # これでログインしていなくても new/create/show が使えます
+
   skip_before_action :require_login, only: %i[new create show]
+  helper_method :prepare_meta_tags
 
   def new
     # 質問を全件、選択肢込みで取得
     @questions = Question.includes(:choices).all
-    # レコードと answer の数だけダミーを build
     @diagnosis_record = DiagnosisRecord.new
     @questions.each { @diagnosis_record.diagnosis_answers.build }
   end
 
 def create
-  # ネストされた answers ハッシュを取り出す
   answers = diagnosis_record_params[:diagnosis_answers_attributes]
 
-  # 各カテゴリのスコアを計算（配列化して渡す）
   body_score    = calculate_score(answers.values, "body")
   emotion_score = calculate_score(answers.values, "emotion")
   mind_score    = calculate_score(answers.values, "mind")
 
-  # パターンコードを決定して master テーブルから結果を取得
   pattern_code     = determine_pattern_code(body_score, emotion_score, mind_score)
   diagnosis_result = DiagnosisResult.find_by!(pattern_code: pattern_code)
 
-  # レコード本体を組み立て
   @diagnosis_record = DiagnosisRecord.new(
     body_score:       body_score,
     emotion_score:    emotion_score,
     mind_score:       mind_score,
     diagnosis_result: diagnosis_result,
-    user:             current_user  # nil でも OK（optional: true）
+    user:             current_user
   )
 
-  # nested answers を build
   answers.values.each do |ans|
     @diagnosis_record.diagnosis_answers.build(
       question_id: ans["question_id"],
@@ -57,11 +51,16 @@ end
   def show
     @diagnosis_record = DiagnosisRecord.find(params[:id])
     @diagnosis_result = @diagnosis_record.diagnosis_result
+    prepare_meta_tags(@diagnosis_result)
+  
+    text = "あなたの診断結果：#{@diagnosis_result.pattern_code}"
+    url  = request.original_url # ← このページURL（OGPをXがクロールするため必須）
+    @tweet_intent_url =
+      "https://twitter.com/intent/tweet?text=#{ERB::Util.url_encode(text)}&url=#{ERB::Util.url_encode(url)}&hashtags=Healscan"
   end
 
   private
 
-  # params の許可
   def diagnosis_record_params
     params.require(:diagnosis_record).permit(
       diagnosis_answers_attributes: [:question_id, :choice_id]
@@ -72,12 +71,10 @@ end
   def calculate_score(answers, category)
     answers.sum do |ans|
       choice   = Choice.find(ans["choice_id"])
-      # fatigue_category は "body","emotion","mind" の文字列を返す enum
       choice.question.fatigue_category == category ? choice.score : 0
     end
   end
   
-  # それぞれの値からパターンコードを返す
   def determine_pattern_code(body, emotion, mind)
     if body.zero? && emotion.zero? && mind.zero?
       "疲労なし"
