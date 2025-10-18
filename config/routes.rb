@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'images/ogp.png', to: 'images#ogp', as: 'images_ogp'
   root "static_pages#top"
   resources :users,    only: %i[new create]
   resources :boards, only: %i[index new create show edit destroy update] do
