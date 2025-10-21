@@ -23,6 +23,8 @@
         </div>
         <!-- ログインボタン -->
         <%= f.submit "ログイン", class: "btn btn-primary" %>
+        <%= check_box_tag :remember, params[:remember], true %>
+        <%= label_tag :remember, 'ログイン状態を保持する' %>
       <% end %>
       <!-- 追加のリンク（新規登録ページ） -->
       <div class='text-center'>

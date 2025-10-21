@@ -9,8 +9,9 @@ class UserSessionsController < ApplicationController
 
   # ログイン処理を行うアクション
   def create
+    remember_flag = ActiveModel::Type::Boolean.new.cast(params[:remember]) 
     # `sorcery` の `login` メソッドを使用して、入力された `email` と `password` で認証を試みる
-    @user = login(params[:email], params[:password])
+    @user = login(params[:email], params[:password], remember_me: remember_flag)
 
     if @user
       # ログイン成功時はトップページへリダイレクト
