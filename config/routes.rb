@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  post '/google_login_api/callback', to: 'google_login_api#callback'
   get 'images/ogp.png', to: 'images#ogp', as: 'images_ogp'
   root "static_pages#top"
-  resources :users,    only: %i[new create]
+  resources :users, only: %i[new create]
   resources :boards, only: %i[index new create show edit destroy update] do
     resources :comments, only: %i[create edit destroy], shallow: true
     resource :like, only: %i[create destroy]

@@ -1,5 +1,6 @@
 <% content_for(:title, t('.title')) %>
 <div class="container">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
   <div class="row">
     <div class=" col-md-10 col-lg-8 mx-auto">
       <!-- ページタイトル -->
@@ -25,6 +26,22 @@
         <%= f.submit "ログイン", class: "btn btn-primary" %>
         <%= check_box_tag :remember, params[:remember], true %>
         <%= label_tag :remember, 'ログイン状態を保持する' %>
+        <!--googleログイン -->
+        <div class="mb-3">
+          <div id="g_id_onload"
+            data-client_id="811707880125-2sm1k1amvipajslkhgrgnr5aet02ta68.apps.googleusercontent.com"
+            data-login_uri="http://localhost:3000/google_login_api/callback"
+            data-auto_prompt="false">
+          </div>
+          <div class="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="outline"
+            data-text="sign_in_with"
+            data-shape="rectangular"
+            data-logo_alignment="left">
+          </div>
+        </div>
       <% end %>
       <!-- 追加のリンク（新規登録ページ） -->
       <div class='text-center'>
