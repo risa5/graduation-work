@@ -10,14 +10,25 @@ class GoogleLoginApiController < ApplicationController
     payload = Google::Auth::IDTokens.verify_oidc(params[:credential], aud: '811707880125-2sm1k1amvipajslkhgrgnr5aet02ta68.apps.googleusercontent.com')
     user = User.find_or_create_by(email: payload['email'])
     session[:user_id] = user.id
-    redirect_to root_path, notice: 'ログインしました'
+    redirect_to user_role_path(@user), success: 'ログインしました'
+  end
+
+
+  def user_role_path(user)
+    case user.role
+    when 'admin'
+      admin_root_path
+    when 'general'
+      root_path
+    end
   end
 
   private
 
   def verify_g_csrf_token
     if cookies["g_csrf_token"].blank? || params[:g_csrf_token].blank? || cookies["g_csrf_token"] != params[:g_csrf_token]
-      render :new, notice: '不正なアクセスです'
+      flash.now[:danger] = 'ログインに失敗しました'
+      render :new, status: :unprocessable_entity
     end
   end
 end
