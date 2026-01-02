@@ -1,6 +1,7 @@
 @use 'bootstrap/scss/bootstrap';
 @use 'bootstrap-icons/font/bootstrap-icons';
 @use 'top';
+@use 'terms';
 
 
 // ヘッダーの背景色
@@ -21,3 +22,8 @@ header {
   #header-profile.dropdown-toggle::after {
   display: none !important;
 }
+
+// フッターの背景色
+footer {
+    background-color: #f1f4f8 !important;
+  }
