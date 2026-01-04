@@ -21,8 +21,15 @@
           <%= f.label :password_confirmation, class: "form-label" %>
           <%= f.password_field :password_confirmation, class: "form-control" %>
         </div>
-        <%= f.submit "登録", class: "btn btn-primary" %>
+        <!-- 利用規約同意確認 -->
+        <div class="field">
+          <%= check_box_tag "terms_accepted", "1", false, id: "terms_checkbox" %>
+          <%= label_tag "terms_checkbox", "【利用規約・プライバシーポリシー】に同意する" %>
+          <%= link_to '(利用規約・プライバシーポリシー)', terms_path %>
+        </div>
+        <%= f.submit "登録", class: "btn btn-primary", disabled: true %>
       <% end %>
+
         <!--googleログイン -->
         <div class="mb-3">
           <div id="g_id_onload"
