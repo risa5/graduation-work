@@ -3,52 +3,79 @@
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-auto">
       <h1>会員登録</h1>
-      <%= form_with model: @user, url: users_path, method: :post, local: true, data: { turbo: false } do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
-        <div class="mb-3">
-          <%= f.label :name, class: "form-label" %>
-          <%= f.text_field :name, class: "form-control" %>
-        </div>
-        <div class="mb-3">
-          <%= f.label :email, class: "form-label" %>
-          <%= f.email_field :email, class: "form-control" %>
-        </div>
-        <div class="mb-3">
-          <%= f.label :password, class: "form-label" %>
-          <%= f.password_field :password, class: "form-control" %>
-        </div>
-        <div class="mb-3">
-          <%= f.label :password_confirmation, class: "form-label" %>
-          <%= f.password_field :password_confirmation, class: "form-control" %>
-        </div>
-        <!-- 利用規約同意確認 -->
-        <div class="field">
-          <%= check_box_tag "terms_accepted", "1", false, id: "terms_checkbox" %>
-          <%= label_tag "terms_checkbox", "【利用規約・プライバシーポリシー】に同意する" %>
-          <%= link_to '(利用規約・プライバシーポリシー)', terms_path %>
-        </div>
-        <%= f.submit "登録", class: "btn btn-primary", disabled: true %>
-      <% end %>
 
-        <!--googleログイン -->
-        <div class="mb-3">
-          <div id="g_id_onload"
-            data-client_id="811707880125-2sm1k1amvipajslkhgrgnr5aet02ta68.apps.googleusercontent.com"
-            data-login_uri="http://localhost:3000/google_login_api/callback"
-            data-auto_prompt="false">
+      <!-- 利用規約同意確認 -->
+      <div class="field">
+        <%= check_box_tag "terms_accepted", "1", false, id: "terms_checkbox" %>
+        <%= label_tag "terms_checkbox", "【利用規約・プライバシーポリシー】に同意する" %>
+        <%= link_to '(利用規約・プライバシーポリシー)', terms_path %>
+      </div>
+    
+      <!-- タブ表示 -->
+      <!-- タブタイトル -->
+      <div class="tabs">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#standard_registration">通常会員登録</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#google_registration">google会員登録</a>
+          </li>
+        </ul>
+        
+      <!-- タブコンテンツ -->
+        <div class="tab-content">
+          <!-- 通常登録 -->
+          <div id="standard_registration" class="tab-pane fade show active">
+            <%= form_with model: @user, url: users_path, method: :post, local: true, data: { turbo: false } do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+              <div class="mb-3">
+                <%= f.label :name, class: "form-label" %>
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= f.label :email, class: "form-label" %>
+                <%= f.email_field :email, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= f.label :password, class: "form-label" %>
+                <%= f.password_field :password, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                <%= f.label :password_confirmation, class: "form-label" %>
+                <%= f.password_field :password_confirmation, class: "form-control" %>
+              </div>
+              <%= f.submit "登録", class: "btn btn-primary", disabled: true, id: "submit_btn" %>
+            <% end %>
           </div>
-          <div class="g_id_signin"
-            data-type="standard"
-            data-size="large"
-            data-theme="outline"
-            data-text="sign_in_with"
-            data-shape="rectangular"
-            data-logo_alignment="left">
+
+          <!-- Google登録 -->
+          <div id="google_registration" class="tab-pane fade">
+            <div class="google_explanation">
+              <p>★Googleアカウントで簡単登録</p>
+              <p>【利用規約・プライバシーポリシー】への同意が必要です</p>
+            </div>
+            <div class="mb-3">
+              <div id="g_id_onload"
+                data-client_id="811707880125-2sm1k1amvipajslkhgrgnr5aet02ta68.apps.googleusercontent.com"
+                data-login_uri="http://localhost:3000/google_login_api/callback"
+                data-auto_prompt="false">
+              </div>
+              <div class="g_id_signin"
+                data-type="standard"
+                data-size="large"
+                data-theme="outline"
+                data-text="sign_in_with"
+                data-shape="rectangular"
+                data-logo_alignment="left">
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+
       <div class='text-center'>
         <%= link_to 'ログインページへ', login_path %>
       </div>
-    </div>
   </div>
 </div>

@@ -1,0 +1,22 @@
+.head-border {
+    display: flex;
+    align-items: center;
+    color: #757575;
+}
+
+.head-border::before,
+.head-border::after {
+    content: "";
+    height: 4px;
+    flex-grow: 1;
+    background-color: #9E9E9E;
+}
+
+.head-border::before {
+    margin-right: 1rem;
+}
+
+.head-border::after {
+    margin-left: 1rem;
+}
+
