@@ -26,6 +26,10 @@
         <%= f.submit "ログイン", class: "btn btn-primary" %>
         <%= check_box_tag :remember, params[:remember], true %>
         <%= label_tag :remember, 'ログイン状態を保持する' %>
+
+        <!-- 区切り線 -->
+        <h2 class="head-border">または</h2>
+
         <!--googleログイン -->
         <div class="mb-3">
           <div id="g_id_onload"

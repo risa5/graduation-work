@@ -1,22 +1,10 @@
-.head-border {
-    display: flex;
-    align-items: center;
-    color: #757575;
+ul.nav-tabs {
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
 }
 
-.head-border::before,
-.head-border::after {
-    content: "";
-    height: 4px;
-    flex-grow: 1;
-    background-color: #9E9E9E;
+.google-disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
-
-.head-border::before {
-    margin-right: 1rem;
-}
-
-.head-border::after {
-    margin-left: 1rem;
-}
-

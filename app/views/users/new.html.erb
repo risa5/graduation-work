@@ -16,10 +16,10 @@
       <div class="tabs">
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#standard_registration">通常会員登録</a>
+            <a class="nav-link active" data-bs-toggle="tab" href="#standard_registration">通常会員登録</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#google_registration">google会員登録</a>
+            <a class="nav-link" data-bs-toggle="tab" href="#google_registration">google会員登録</a>
           </li>
         </ul>
         
@@ -55,7 +55,7 @@
               <p>★Googleアカウントで簡単登録</p>
               <p>【利用規約・プライバシーポリシー】への同意が必要です</p>
             </div>
-            <div class="mb-3">
+            <div id="google_login_wrapper" class="google-disabled">
               <div id="g_id_onload"
                 data-client_id="811707880125-2sm1k1amvipajslkhgrgnr5aet02ta68.apps.googleusercontent.com"
                 data-login_uri="http://localhost:3000/google_login_api/callback"
