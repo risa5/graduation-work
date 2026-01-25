@@ -1,10 +1,12 @@
-<% content_for(:title, t('.title')) %>
-<h1><%= t('.title') %></h1>
+<div class="container">
+  <% content_for(:title, t('.title')) %>
+  <h2><%= t('.title') %></h2>
 
-<%= form_with model: @diagnosis_record,
-              url:   diagnoses_path,
-              local: true,
-              html:  { "data-turbo" => false } do |f| %>
+  <%= form_with model: @diagnosis_record,
+                url:   diagnoses_path,
+                local: true,
+                html:  { "data-turbo" => false } do |f| %>
+  
   <% @questions.each_with_index do |question, idx| %>
     <div class="question-block">
       <!-- 質問文 -->
@@ -13,16 +15,17 @@
       <!-- nested_fields_for -->
       <%= f.fields_for :diagnosis_answers, @diagnosis_record.diagnosis_answers[idx] do |a| %>
         <%= a.hidden_field :question_id, value: question.id %>
-        <% question.choices.each do |choice| %>
-          <label>
-            <%= a.radio_button :choice_id, choice.id %>
-            <%= choice.choice_content %>
-          </label><br>
-        <% end %>
+          <% question.choices.each do |choice| %>
+            <label>
+              <%= a.radio_button :choice_id, choice.id %>
+              <%= choice.choice_content %>
+            </label><br>
+          <% end %>
       <% end %>
     </div>
     <hr>
   <% end %>
 
   <%= f.submit "診断結果を表示", class: "btn btn-primary" %>
-<% end %>
+  <% end %>
+</div>

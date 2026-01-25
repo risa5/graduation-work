@@ -48,6 +48,8 @@ gem 'googleauth'
 
 gem 'jquery-rails'
 
+gem 'omniauth-google-oauth2'
+
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

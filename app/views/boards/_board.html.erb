@@ -20,7 +20,7 @@
             <%= render 'bookmark_buttons', { board: board } %>
           <% end %>
         </div>
-        <ul class="list-inline mt-2 mb-1">
+        <ul class="list-inline mt-2 mb-1" id="board_list">
           <li><i class="bi bi-person"></i> <%= board.user.name %></li>
           <li><i class="bi bi-calendar"></i> <%= board.created_at.strftime("%Y/%m/%d %H:%M") %></li>
         </ul>

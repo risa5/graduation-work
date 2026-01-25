@@ -6,14 +6,12 @@
 @use 'user_sessions';
 
 
-// ヘッダーの背景色
+// ヘッダー
 header {
-    background-color: #c7c7ff !important;
-  }
-  
-  // Bootstrapのbg-lightを上書き
   .navbar {
-    background-color: #f1f4f8 !important;
+    background-color: rgba(241, 244, 248, 0.3) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
   .navbar-brand {
@@ -23,13 +21,72 @@ header {
 
   #header-profile.dropdown-toggle::after {
   display: none !important;
+  }
 }
 
-// フッターの背景色
-footer {
-    background-color: #f1f4f8 !important;
+.navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 1rem;
+  margin-left: auto !important;
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+// body
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: rgb(99, 100, 100);
+  font-family: "Noto Sans JP", sans-serif;
+
+  background-image: url("/assets/background_4.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+    h2 {
+    position: relative;
+    display: inline-block;
+    padding: 0 55px;
   }
 
-body {
-  background-color: #f0f0ff;
+  h2:before, h2:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    width: 45px;
+    height: 1px;
+    background-color: black;
+  }
+
+  h2:before {
+    left:0;
+  }
+  h2:after {
+    right: 0;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+main {
+  flex: 1;
+}
+
+// フッター
+footer {
+  background-color: rgba(241, 244, 248, 0.3) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  min-height: 80px;
+  padding: 16px 0;
 }

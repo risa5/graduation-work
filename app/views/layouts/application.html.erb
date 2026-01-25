@@ -13,28 +13,29 @@
     <%= csp_meta_tag %>
 
     <!-- スタイルシートの読み込み -->
-    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <!-- JavaScriptの読み込み（Turbolinks用・再読み込みが必要な場合に適用） -->
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 
     <!-- メタタグ -->
     <%= display_meta_tags %>
   </head>
 
-  <body>
-    <!-- ヘッダーの表示（ログイン状態によって切り替え） -->
-    <% if logged_in? %>
-      <!-- ログイン済みなら通常のヘッダーを表示 -->
-      <%= render 'shared/header' %>
-    <% else %>
-      <!-- 未ログインならログイン前用のヘッダーを表示 -->
-      <%= render 'shared/before_login_header' %>
-    <% end %>
-    <%= render 'shared/flash_message' %>
-    <!-- 各ページのコンテンツが挿入される部分（ビューの内容を表示） -->
-    <%= yield %>
-    <!-- フッターの表示 -->
-    <%= render 'shared/footer' %>
-  </body>
+    <body>
+      <!-- ヘッダーの表示（ログイン状態によって切り替え） -->
+      <% if logged_in? %>
+        <!-- ログイン済みなら通常のヘッダーを表示 -->
+        <%= render 'shared/header' %>
+      <% else %>
+        <!-- 未ログインならログイン前用のヘッダーを表示 -->
+        <%= render 'shared/before_login_header' %>
+      <% end %>
+      <%= render 'shared/flash_message' %>
+      <!-- 各ページのコンテンツが挿入される部分（ビューの内容を表示） -->
+      <main>
+        <%= yield %>
+      </main>
+      <!-- フッターの表示 -->
+      <%= render 'shared/footer' %>
+    </body>
 </html>

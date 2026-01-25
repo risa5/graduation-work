@@ -1,14 +1,46 @@
 .container {
-  background-color: #f0f0ff;
-
   .term {
-    color: rgb(39, 38, 38);
+    color: rgb(99, 100, 100);
   }
 
   .term_list {
-    color: rgb(39, 38, 38);
+    color: rgb(99, 100, 100);
   }
   ul {
      list-style: square;
+  }
+
+  .privacy_policy{
+    color: rgb(99, 100, 100);
+  }
+
+  .policy_list{
+    color: rgb(99, 100, 100);
+  }
+  ul {
+     list-style: square;
+  }
+
+  h2 {
+    position: relative;
+    display: inline-block;
+    padding: 0 55px;
+  }
+
+  h2:before, h2:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    width: 45px;
+    height: 1px;
+    background-color: black;
+  }
+
+  h2:before {
+    left:0;
+  }
+  h2:after {
+    right: 0;
   }
 }
