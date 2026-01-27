@@ -1,27 +1,28 @@
-<% content_for(:title, t('.title')) %>
-<div class="container pt-3">
+<div class="container py-4">
   <div class="row">
-    <div class="col-lg-10 offset-lg-1">
-      <%= render 'search_form', q: @q, url: boards_path %>
-    </div>
-  </div>
-  <!-- 掲示板一覧 -->
-  <div class="row">
-    <div class="col-12">
-      <div class="row">
-        <h2><%= t('.title') %></h2>
-        <% if @boards.present? %>
-          <%= render @boards %>
-        <% else %>
-          <div class="mb-3">投稿がありません</div>
-        <% end %>
+    <div class="col-11 col-md-11 col-lg-10 mx-auto">
+      <div class="board_index">
+        <% content_for(:title, t('.title')) %>
+          <h2><%= t('.title') %></h2>
+          <!-- 検索機能 -->
+          <%= render 'search_form', q: @q, url: boards_path %>
+
+          <!-- 掲示板一覧 -->
+            <% if @boards.present? %>
+              <div class="row row-cols-1 row-cols-lg-3 g-3">
+                <%= render @boards %>
+              </div>
+            <% else %>
+              <div class="mb-3">投稿がありません</div>
+            <% end %>
+
+          <div class="text-muted small">
+            投稿件数 : <%= @boards.total_count %>,
+            総ページ数: <%= @boards.total_pages %>,
+            現在のページ: <%= @boards.current_page %>
+          </div>
+          <%= paginate @boards, theme: 'bootstrap-5' %>
       </div>
-      <div class="text-muted small">
-        投稿件数 : <%= @boards.total_count %>,
-        総ページ数: <%= @boards.total_pages %>,
-        現在のページ: <%= @boards.current_page %>
-      </div>
-      <%= paginate @boards, theme: 'bootstrap-5' %>
     </div>
   </div>
 </div>

@@ -1,26 +1,11 @@
-.container {
-  .term {
-    color: rgb(99, 100, 100);
+.terms-page {
+  // 文字のカラー指定
+  color: rgb(99, 100, 100);
+ // 箇条書きのスタイル指定
+  .terms-list-style {
+    list-style: square;
   }
-
-  .term_list {
-    color: rgb(99, 100, 100);
-  }
-  ul {
-     list-style: square;
-  }
-
-  .privacy_policy{
-    color: rgb(99, 100, 100);
-  }
-
-  .policy_list{
-    color: rgb(99, 100, 100);
-  }
-  ul {
-     list-style: square;
-  }
-
+ // タイトルの装飾
   h2 {
     position: relative;
     display: inline-block;
@@ -37,10 +22,17 @@
     background-color: black;
   }
 
-  h2:before {
-    left:0;
+  h2:before { left: 0; }
+  h2:after { right: 0; }
+
+  // 画面サイズごとに文字サイズ変更
+  .term_message { font-size: 12px; }
+
+  @media (min-width: 768px) {
+    .term_message { font-size: 13px; }
   }
-  h2:after {
-    right: 0;
+
+  @media (min-width: 992px) {
+    .term_message { font-size: 15px; }
   }
 }
