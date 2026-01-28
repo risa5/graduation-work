@@ -1,16 +1,18 @@
+<% content_for(:title, t('.title')) %>
+
 <div class="container py-4">
   <div class="row">
     <div class="col-11 col-md-11 col-lg-10 mx-auto">
       <div class="board_index">
-        <% content_for(:title, t('.title')) %>
           <h2><%= t('.title') %></h2>
           <!-- 検索機能 -->
           <%= render 'search_form', q: @q, url: boards_path %>
 
           <!-- 掲示板一覧 -->
             <% if @boards.present? %>
-              <div class="row row-cols-1 row-cols-lg-3 g-3">
-                <%= render @boards %>
+              <div class="row g-3">
+                <%= render partial: "board", collection: @boards, as: :board, locals: { truncate: true } %>
+              </div>
               </div>
             <% else %>
               <div class="mb-3">投稿がありません</div>

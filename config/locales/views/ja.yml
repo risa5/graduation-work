@@ -88,6 +88,9 @@ ja:
       success: パスワードリセット手順を送信しました
     update:
       success: パスワードを変更しました
+  pages:  
+    terms:
+      title: 利用規約・プライバシーポリシー
   admin:
     user_sessions:
       new:

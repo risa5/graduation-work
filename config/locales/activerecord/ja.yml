@@ -13,6 +13,7 @@ ja:
         password: パスワード
         password_confirmation: パスワード確認
         role: 権限
+        avatar: アイコン
       board:
         title: タイトル
         body: 本文
