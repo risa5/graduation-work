@@ -1,7 +1,9 @@
 <% content_for(:title, t('.title')) %>
-<div class="container pt-5">
-  <div class="row mb-3">
-    <div class="col-lg-8 offset-lg-2">
+
+<div class="container py-4">
+  <div class="row">
+    <div class="col-11 col-md-10 col-lg-9 mx-auto">
+      <div class="board_show>
       <h2><%= t('.title') %></h2>
       <article class="card">
         <div class="card-body">
@@ -10,10 +12,16 @@
               <%= image_tag @board.board_image_url, width: "300", height: "200", class: "card-img-top img-fluid" %>
             </div>
             <div class="col-md-9">
-              <h3 style="display: inline;"><%= "Title：#{@board.title}" %></h3>
-              <ul class="list-inline">
-                <li class="list-inline-item"><%= "by #{@board.user.name}" %></li>
-                <li class="list-inline-item"><%= @board.created_at.strftime("%Y/%m/%d %H:%M") %></li>
+              <h3 style="display: inline;"><%= "#{@board.title}" %></h3>
+              <ul class="list-inline board-info">
+                <li class="list-inline-item">
+                  <i class="bi bi-person me-1"></i>
+                  <%= "#{@board.user.name}" %>
+                </li>
+                <li class="list-inline-item">
+                  <i class="bi bi-calendar me-1"></i>
+                  <%= @board.created_at.strftime("%Y/%m/%d %H:%M") %>
+                </li>
               </ul>
               <% if current_user.own?(@board) %>
                 <div class='d-flex justify-content-end'>
@@ -44,15 +52,17 @@
           </div>
         </article>
       </div>
-    </div>
-    <%= render 'comments/form', comment: @comment, board: @board %>
-    <div class="row">
-      <div class="col-lg-8 offset-lg-2">
-        <table class="table">
-          <tbody id="table-comment">
+
+      <p><div class="bg-white bg-opacity-50 rounded-3 p-4"></p>
+        <%= render 'comments/form', comment: @comment, board: @board %>
+          <table class="table">
+            <tbody id="table-comment">
             <%= render @comments %>
           </tbody>
         </table>
+      </div>
+      <div class="d-flex justify-content-center gap-2 flex-wrap mt-4">
+        <%= link_to '掲示板一覧画面へ戻る', boards_path, class: "btn btn-secondary" %>
       </div>
     </div>
   </div>

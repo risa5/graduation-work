@@ -4,8 +4,16 @@
     <%= image_tag comment.user.image_url, class: 'rounded-circle', size: '50x50' %>
   </td>
   <td>
-    <h3 class="small"><%= "User：#{comment.user.name}" %></h3>
-    <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+    <ul class="list-inline small">
+      <li class="list-inline-item">
+        <i class="bi bi-person-heart me-1"></i>
+        <%= "#{comment.user.name}" %>
+      </li>
+      <li class="list-inline-item">
+        <i class="bi bi-calendar-heart-fill me-1"></i>
+        <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </li>
+    </ul>
     <p><%= simple_format(comment.body) %></p>
   </td>
   <% if current_user.own?(comment) %>

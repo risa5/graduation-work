@@ -10,8 +10,11 @@ ja:
   defaults:
     create: 作成
     post: 投稿
+    comment_post: コメント投稿
     search_word: 検索ワード
     edit: 編集
+    profile_edit: プロフィール編集
+    profile_update: プロフィール更新
     show: 詳細
     delete: 削除
     delete_confirm: 削除しますか？

@@ -20,7 +20,8 @@ ja:
         board_image: サムネイル
         user: 作成者
       comment:
-        body: コメント
+        body: コメント欄
+        field: コメントを書きましょう
       diagnose:
   attributes:
     id: ID

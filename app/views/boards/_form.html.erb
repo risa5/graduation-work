@@ -13,5 +13,7 @@
     <%= f.file_field :board_image, class: "form-control", accept: 'image/*' %>
     <%= f.hidden_field :board_image_cache %>
   </div>
-  <%= f.submit nil, class: "btn btn-primary" %>
+  <div class="text-end">
+    <%= f.submit t('defaults.post'), class: "btn btn-primary" %>
+  </div>
 <% end %>
