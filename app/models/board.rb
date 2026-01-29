@@ -1,5 +1,5 @@
 class Board < ApplicationRecord
-  validates :title, presence: true, length: { maximum: 255 }
+  validates :title, presence: true, length: { maximum: 15 }
   validates :body, presence: true, length: { maximum: 65_535 }
 
   paginates_per 21

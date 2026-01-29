@@ -49,8 +49,8 @@
       <% end %>
       <!-- 追加のリンク（新規登録ページ） -->
       <div class='text-center'>
-        <%= link_to '登録ページへ', new_user_path %>
-        <%= link_to 'パスワードを忘れた方', new_password_reset_path %>
+        <p><%= link_to 'パスワードを忘れた方', new_password_reset_path %></p>
+        <%= link_to t('user_sessions.new.to_register_page'), new_user_path, class: 'btn btn-secondary' %>
       </div>
     </div>
   </div>

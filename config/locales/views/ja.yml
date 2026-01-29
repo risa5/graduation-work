@@ -10,7 +10,6 @@ ja:
   defaults:
     create: 作成
     post: 投稿
-    comment_post: コメント投稿
     search_word: 検索ワード
     edit: 編集
     profile_edit: プロフィール編集
@@ -40,7 +39,7 @@ ja:
     new:
       title: ログイン
       login: ログイン
-      to_register_page: 登録ページへ
+      to_register_page: 会員登録ページへ
       password_forget: パスワードをお忘れの方はこちら
     create:
       success: ログインしました
@@ -94,6 +93,8 @@ ja:
   pages:  
     terms:
       title: 利用規約・プライバシーポリシー
+  comments:
+    post: コメント投稿
   admin:
     user_sessions:
       new:
