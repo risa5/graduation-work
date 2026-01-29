@@ -5,13 +5,11 @@
 }
 
 .board-body {
-  /* line-clamp（Chrome / Edge / Safari で有効） */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
 
-  /* フォールバック（万一 line-clamp が効かなくても高さで止める） */
   line-height: 1.5;
   max-height: calc(1.5em * 3);
 }
