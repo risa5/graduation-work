@@ -110,14 +110,15 @@ ja:
         title: ダッシュボード
     users:
       index:
-        title: ユーザー一覧
+        title: ユーザー管理
       edit:
         title: ユーザー編集
       show:
         title: ユーザー詳細
     boards:
       index:
-        title: 掲示板一覧
+        title: 掲示板管理
+        search: 掲示板検索
       edit:
         title: 掲示板編集
       show:

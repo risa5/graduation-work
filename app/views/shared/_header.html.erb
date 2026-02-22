@@ -21,15 +21,12 @@
 
       <%# 管理者だけに管理メニューを表示 %>
         <% if current_user&.admin? %>
-          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button"
-          data-bs-toggle="dropdown" aria-expanded="false">
-          管理者用メニュー
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
-            <li><%= link_to "ユーザー管理", admin_users_path, class: "dropdown-item" %></li>
-            <li><%= link_to "掲示板管理", admin_boards_path, class: "dropdown-item" %></li>
-          </ul>
+          <li class="nav-item dropdown bg-danger bg-opacity-50 rounded-2">
+            <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">管理者用メニュー</a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
+              <li><%= link_to "ユーザー管理", admin_users_path, class: "dropdown-item" %></li>
+              <li><%= link_to "掲示板管理", admin_boards_path, class: "dropdown-item" %></li>
+            </ul>
           </li>
         <% end %>
 
@@ -48,7 +45,7 @@
                       aria: { haspopup: 'true', expanded: 'false' },
                       id: 'header-board-menu' %>
           <div class='dropdown-menu dropdown-menu-end'
-               aria-labelledby='header-board-menu'>
+            aria-labelledby='header-board-menu'>
             <%= link_to '掲示板一覧', boards_path , class: 'dropdown-item' %>
             <%= link_to '掲示板作成', new_board_path , class: 'dropdown-item' %>
           </div>
@@ -67,7 +64,7 @@
           <% end %>
 
           <div class='dropdown-menu dropdown-menu-end'
-               aria-labelledby='header-profile'> 
+            aria-labelledby='header-profile'> 
             <div class='dropdown-item'><%= link_to current_user.name , profile_path, class: 'dropdown-item' %></div>
             <div class='dropdown-divider'></div>
             <!-- ブックマークページへのリンク（見た目のみ調整：nav-link → dropdown-item） -->

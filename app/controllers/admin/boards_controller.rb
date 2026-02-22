@@ -11,7 +11,7 @@ class Admin::BoardsController < ApplicationController
     @comment = Comment.new
     @comments = @board.comments.includes(:user).order(created_at: :desc)
   end
-  
+
   def destroy
     @board = Board.find(params[:id])
     @board.destroy!
@@ -24,9 +24,9 @@ class Admin::BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      redirect_to admin_board_path(@board), success: t('defaults.flash_message.updated', item: Board.name)
+      redirect_to admin_board_path(@board), success: '更新に成功しました'
     else
-      flash.now['danger'] = t('defaults.flash_message.not_updated', item: Board.name)
+      flash.now['danger']  = '更新に失敗しました'
       render :edit, status: :unprocessable_entity
     end
   end

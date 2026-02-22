@@ -6,6 +6,7 @@
 @use 'user_sessions';
 @use 'boards';
 @use 'comments';
+@use 'admin/dashboards';
 
 
 // ヘッダー
@@ -64,7 +65,7 @@ body {
     display: inline-block;
     width: 45px;
     height: 1px;
-    background-color: black;
+    background-color: rgb(99, 100, 100);
   }
 
   h2:before {
