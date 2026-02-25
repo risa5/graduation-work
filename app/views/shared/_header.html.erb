@@ -1,7 +1,7 @@
 <header>
   <nav class='navbar navbar-expand-lg navigation navbar-light bg-light'>
     <!-- ロゴ画像をクリックするとトップページ（'/'）へ遷移 -->
-    <%= link_to '/', class: 'navbar-brand' do %>
+    <%= link_to current_user.admin? ? admin_root_path : root_path, class: 'navbar-brand' do %>
       <%= image_tag 'logo.png' %>
     <% end %>
 

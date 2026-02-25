@@ -115,7 +115,7 @@
       </div>
 
       <div class="d-flex justify-content-center gap-2 flex-wrap mt-4">
-        <%= link_to 'TOP画面へ戻る', root_path, class: "btn btn-secondary"  %>
+        <%= link_to 'TOP画面へ戻る', current_user.admin? ? admin_root_path : root_path, class: "btn btn-secondary"  %>
         <%= link_to '診断開始', new_diagnosis_path, class: "btn btn-secondary" %>
       </div>
       <div class="term_message text-center">
