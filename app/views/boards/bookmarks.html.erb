@@ -2,20 +2,25 @@
 
 <div class="container py-4">
   <div class="row">
-    <div class="col-11 col-md-11 col-lg-10 mx-auto">
-      <div class="bookmark_index">
-        <h2><%= t('.title') %></h2>
-          <%= render 'search_form', q: @q, url: bookmarks_boards_path %>
-          <!-- 掲示板一覧 -->
-          <% if @bookmark_boards.present? %>
-            <div class="row g-3">
-              <%= render partial: "boards/board", collection: @bookmark_boards, as: :board, locals: { truncate: true } %>
-            </div>
-          <% else %>
-            <p><%= t('.no_result') %></p>
-          <% end %>
+    <div class="col-12 col-md-11 mx-auto">
+
+      <!-- タイトル -->
+      <h2><%= t('.title') %></h2>
+
+      <!-- 掲示板一覧 -->
+      <% if @bookmark_boards.present? %>
+        <div class="row g-3">
+          <%= render partial: "boards/board", collection: @bookmark_boards, as: :board, locals: { truncate: true } %>
+        </div>
+      <% else %>
+        <p><%= t('.no_result') %></p>
+      <% end %>
+
+      <!-- ページネーション-->
+      <div class="pagination">
+        <%= paginate @bookmark_boards, theme: 'bootstrap-5' %>
       </div>
-      <%= paginate @bookmark_boards, theme: 'bootstrap-5' %>
+      
     </div>
   </div>
 </div>

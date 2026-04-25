@@ -14,7 +14,7 @@
 
       <!-- 掲示板一覧 -->
       <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped admin-board-table">
           <thead>
             <tr>
               <th scope="col">ID</th>
@@ -32,12 +32,15 @@
         </table>
       </div>
 
-      <!-- ページネーション -->
+      <!-- ページ数表示 -->
       <div class="text-muted small text-end my-4">
-        投稿件数 : <%= @boards.total_count %> / 総ページ数: <%= @boards.total_pages %> / 現在のページ: <%= @boards.current_page %>
+        投稿件数: <%= @boards.total_count %> / 総ページ数: <%= @boards.total_pages %> / 現在のページ: <%= @boards.current_page %>
       </div>
-      <%= paginate @boards, theme: 'bootstrap-5' %>
 
+      <!-- ページネーション -->
+      <div class="pagination">
+        <%= paginate @boards, theme: 'bootstrap-5' %>
+      </div>
     </div>
   </div>
 </div>

@@ -7,7 +7,7 @@
       <div class="d-inline me-3">
         <%= f.select :role_eq, User.roles_i18n.invert.map{|key, value| [key, User.roles[value]]}, { include_blank: "指定なし" }, { class: 'form-control mr-1' } %>
       </div>
-      <%= f.submit class: 'btn btn-primary' %>
+      <%= f.submit class: 'btn btn-secondary' %>
     </div>
   </div>
 <% end %>

@@ -6,7 +6,9 @@
 @use 'user_sessions';
 @use 'boards';
 @use 'comments';
+@use 'diagnosis';
 @use 'admin/dashboards';
+@use 'admin/admin_boards';
 
 
 // ヘッダー

@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "like-area-for-board-#{@board.id}" do %>
+  <%= render 'boards/like_area', board: @board %>
+<% end %>

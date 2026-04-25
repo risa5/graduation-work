@@ -48,7 +48,7 @@ ja:
       success: ログアウトしました
   users:
     new:
-      title: ユーザー登録
+      title: 会員登録
       to_login_page: ログインページへ
     create:
       success: ユーザー登録が完了しました
@@ -56,12 +56,14 @@ ja:
   boards:
     new:
       title: 掲示板作成
+      post: 掲示板投稿
     show:
       title: 掲示板詳細
     index:
       title: 掲示板一覧
     edit:
       title: 掲示板編集
+      update: 掲示板更新
     bookmarks:
       title: ブックマーク一覧
       no_result: ブックマーク中の掲示板がありません。

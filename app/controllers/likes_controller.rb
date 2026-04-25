@@ -1,13 +1,11 @@
 class LikesController < ApplicationController
   def create
-    @like = Like.new(user_id: current_user.id, board_id: params[:board_id])
-    @like.save
-    redirect_to board_path(params[:board_id]) 
+    @board = Board.find(params[:board_id])
+    current_user.likes.create(board: @board)
   end
 
   def destroy
-    @like = Like.find_by(user_id: current_user.id, board_id: params[:board_id])
-    @like.destroy
-    redirect_to board_path(params[:board_id]) 
+    @board = Board.find(params[:board_id])
+    current_user.likes.find_by(board: @board)&.destroy
   end
 end

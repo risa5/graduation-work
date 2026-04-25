@@ -1,31 +1,51 @@
-<div class="container">
-  <% content_for(:title, t('.title')) %>
-  <h2><%= t('.title') %></h2>
+<% content_for(:title, t('.title')) %>
 
-  <%= form_with model: @diagnosis_record,
-                url:   diagnoses_path,
-                local: true,
-                html:  { "data-turbo" => false } do |f| %>
+<div class="container  py-4">
+  <div class="row">
+    <div class="col-12 col-md-11 mx-auto">
+
+      <!-- タイトル -->
+      <h2><%= t('.title') %></h2>
+
+      <!-- 質問回答フォーム -->
+      <%= form_with model: @diagnosis_record,
+                    url: diagnoses_path,
+                    data: { turbo: false } do |f| %>
+
+      <%= render 'shared/error_messages', object: @diagnosis_record %>
   
-  <% @questions.each_with_index do |question, idx| %>
-    <div class="question-block">
-      <!-- 質問文 -->
-      <p><strong><%= question.question_content %></strong></p>
+      <!-- 質問文表示 -->
+      <% @questions.each_with_index do |question, idx| %>
 
-      <!-- nested_fields_for -->
-      <%= f.fields_for :diagnosis_answers, @diagnosis_record.diagnosis_answers[idx] do |a| %>
-        <%= a.hidden_field :question_id, value: question.id %>
-          <% question.choices.each do |choice| %>
-            <label>
-              <%= a.radio_button :choice_id, choice.id %>
-              <%= choice.choice_content %>
-            </label><br>
-          <% end %>
+        <div class="bg-white bg-opacity-50 rounded-3 p-4 mb-4 shadow-sm">
+          <div class="mb-3 fw-bold fs-5">
+            <span class="badge bg-secondary me-2">Q<%= idx + 1 %></span>
+            <%= question.question_content %>
+          </div>
+
+          <!-- 選択肢表示 -->
+          <div class="row row-cols-1 row-cols-md-2 g-2">
+            <%= f.fields_for :diagnosis_answers, @diagnosis_record.diagnosis_answers[idx] do |a| %>
+              <%= a.hidden_field :question_id, value: question.id %>
+                <% question.choices.each do |choice| %>
+                  <label>
+                    <%= a.radio_button :choice_id, choice.id %>
+                    <%= choice.choice_content %>
+                  </label><br>
+                <% end %>
+            <% end %>
+          </div>
+
+        </div>
       <% end %>
-    </div>
-    <hr>
-  <% end %>
 
-  <%= f.submit "診断結果を表示", class: "btn btn-primary" %>
-  <% end %>
+      <!-- ボタン -->
+      <div class="d-flex justify-content-end mb-3 text-end gap-2">
+        <%= f.submit "診断結果を表示", class: "btn btn-secondary" %>
+        <% end %>
+        <%= link_to 'トップ画面へ戻る', current_user.admin? ? admin_root_path : root_path , class: "btn btn-secondary float-end" %>
+      </div>
+
+    </div>
+  </div>
 </div>

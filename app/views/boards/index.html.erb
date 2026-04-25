@@ -2,31 +2,34 @@
 
 <div class="container py-4">
   <div class="row">
-    <div class="col-11 col-md-11 col-lg-10 mx-auto">
-      <div class="board_index">
-        <h2><%= t('.title') %></h2>
-          <!-- 検索機能 -->
+    <div class="col-12 col-md-11 mx-auto">
+
+      <!-- タイトル -->
+      <h2><%= t('.title') %></h2>
+
+        <!-- 検索機能 -->
+        <div class="bg-white bg-opacity-50 rounded-3 py-4 my-3">
           <%= render 'search_form', q: @q, url: boards_path %>
+        </div>
 
-          <!-- 掲示板一覧 -->
-          <% if @boards.present? %>
-            <div class="row g-3">
-              <%= render partial: "board", collection: @boards, as: :board, locals: { truncate: true } %>
-            </div>
-          <% else %>
-            <div class="mb-3">投稿がありません</div>
-          <% end %>
-
-          <!-- ページ数表示 -->
-          <div class="text-muted small text-end my-4">
-            投稿件数 :<%= @boards.total_count %> / 総ページ数: <%= @boards.total_pages %> / 現在のページ: <%= @boards.current_page %>
+        <!-- 掲示板一覧 -->
+        <% if @boards.present? %>
+          <div class="row g-3">
+            <%= render partial: "board", collection: @boards, as: :board %>
           </div>
+        <% else %>
+          <div class="mb-3">投稿がありません</div>
+        <% end %>
 
-          <!-- ページネーション-->
-          <div class="pagination">
-            <%= paginate @boards, theme: 'bootstrap-5' %>
-          </div>
-      </div>
+        <!-- ページ数表示 -->
+        <div class="text-muted small text-end my-4">
+          投稿件数: <%= @boards.total_count %> / 総ページ数: <%= @boards.total_pages %> / 現在のページ: <%= @boards.current_page %>
+        </div>
+
+        <!-- ページネーション-->
+        <div class="pagination">
+          <%= paginate @boards, theme: 'bootstrap-5' %>
+        </div>
     </div>
   </div>
 </div>

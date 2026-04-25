@@ -1,0 +1,49 @@
+.admin-board-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.admin-board-table th,
+.admin-board-table td {
+  vertical-align: top;
+  padding: 10px 6px;
+  overflow: hidden;
+}
+
+
+.admin-board-table th:nth-child(1),
+.admin-board-table td:nth-child(1) { width: 55px; }
+
+.admin-board-table th:nth-child(2),
+.admin-board-table td:nth-child(2) { width: 110px; }
+
+.admin-board-table th:nth-child(3),
+.admin-board-table td:nth-child(3) { width: 120px; }
+
+.admin-board-table th:nth-child(4),
+.admin-board-table td:nth-child(4) { width: 220px; }
+
+.admin-board-table th:nth-child(5),
+.admin-board-table td:nth-child(5),
+.admin-board-table th:nth-child(6),
+.admin-board-table td:nth-child(6) { width: 120px;}
+
+.admin-board-table th:nth-child(7),
+.admin-board-table td:nth-child(7) { width: 110px; }
+
+
+.admin-board-body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  line-height: 1.5;
+  max-height: calc(1.5em * 3);
+  word-break: break-all;
+}
+
+.admin-board-table td:nth-child(3),
+.admin-board-table td:nth-child(5),
+.admin-board-table td:nth-child(6) {
+  white-space: nowrap;
+}

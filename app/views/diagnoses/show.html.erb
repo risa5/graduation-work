@@ -1,19 +1,38 @@
+<% content_for(:title, t('.title')) %>
+
 <div class="container py-4">
   <div class="row">
-    <div class="col-12 col-md-10 col-lg-8 mx-auto">
-      <div class="result-page bg-white bg-opacity-75 rounded-3 p-4">
-        <% content_for(:title, t('.title')) %>
-        <h2><%= t('.title') %></h2>
+    <div class="col-12 col-md-11 mx-auto">
 
-        <p><strong class="fs-5 fs-md-4 fs-lg-3">パターン</strong></p>
-        <p><%= @diagnosis_result.pattern_code %></p>
-        <p><%= @diagnosis_result.result_summary %></p>
+      <!-- タイトル -->
+      <h2><%= t('.title') %></h2>
 
-        <strong class="fs-5 fs-md-4 fs-lg-3">おすすめケア</strong>
-        <p><%= simple_format(@diagnosis_result.suggestion) %></p>
+      <!-- 結果表示 -->
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 rounded-3 p-2 my-2 shadow-sm result-card">
+          <div class="m-2 text-center">
+            <span class="fw-bold fs-5">現在のあなたは</span>
+            <span class="fw-bold fs-3">
+              <%= @diagnosis_result.pattern_code %>
+            </span>
+            <span class="fw-bold fs-5">を抱えている可能性があります</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white bg-opacity-50 rounded-3 p-4 mb-4 shadow-sm text-center">
+        <p class="fs-5 mb-5 text-muted">
+          <%= @diagnosis_result.result_summary %>
+        </p>
+
+        <h3 class="fs-4 fw-bold mb-3">おすすめケア</h3>
+        <p class="fs-5 mb-0">
+          <%= simple_format(@diagnosis_result.suggestion) %>
+        </p>
       </div>
 
-      <div class="d-flex justify-content-center gap-2 flex-wrap mt-4">
+      <!-- ボタン -->
+      <div class="d-flex justify-content-center gap-2 flex-wrap m-4">
         <%= link_to "もう一度診断する", new_diagnosis_path, class: "btn btn-secondary" %>
         <%= link_to "X（旧Twitter）で共有する",
           @tweet_intent_url,

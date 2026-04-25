@@ -3,7 +3,9 @@ class Admin::BoardsController < ApplicationController
 
   def index
     @q = Board.ransack(params[:q])
-    @boards = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    @boards = @q.result(distinct: true)
+                .order(created_at: :desc)
+                .page(params[:page])
   end
 
   def show
@@ -32,7 +34,8 @@ class Admin::BoardsController < ApplicationController
   end
 
   private
-
+  
+  # 許可するカラムの指定
   def board_params
     params.require(:board).permit(:title, :body, :board_image, :board_image_cache)
   end

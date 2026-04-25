@@ -2,14 +2,18 @@
 
 <div class="container py-4">
   <div class="row">
-    <div class="col-12 col-md-11 col-lg-10 mx-auto">
-      <div class="bg-white bg-opacity-50 rounded-3 p-4">
-        <h2><%= t('.title') %></h2>
-        <%= render 'form', board: @board %>
-      </div>
-      <div class="d-flex justify-content-center gap-2 flex-wrap mt-4">
-        <%= link_to '掲示板一覧画面へ', boards_path, class: "btn btn-secondary" %>
-      </div>
+    <div class="col-11 col-md-10 col-lg-9 mx-auto">
+      <h2><%= t('.title') %></h2>
+
+        <!-- 投稿内容入力フォーム -->
+        <div class="bg-white bg-opacity-50 rounded-3 p-4">
+          <%= render 'form', board: @board %>
+        </div>
+
+        <!-- 一覧画面へ戻るボタン表示 -->
+        <div class="text-end mt-4">
+          <%= link_to '掲示板一覧画面へ', boards_path, class: "btn btn-secondary" %>
+        </div>
     </div>
   </div>
 </div>

@@ -1,9 +1,19 @@
 <% content_for(:title, t('.title')) %>
-<div class="container">
+
+<div class="container py-4">
   <div class="row">
-    <div class="col-lg-8 offset-lg-2">
+    <div class="col-11 col-md-10 col-lg-9 mx-auto">
       <h2><%= t('.title') %></h2>
-      <%= render 'form', board: @board %>
+
+      <!-- 投稿内容編集フォーム -->
+      <div class="bg-white bg-opacity-50 rounded-3 p-4">
+        <%= render 'form', board: @board %>
+      </div>
+
+      <!-- 一覧画面へ戻るボタン表示 -->
+      <div class="text-end mt-4">
+        <%= link_to '掲示板一覧画面へ', boards_path, class: "btn btn-secondary" %>
+      </div>
     </div>
   </div>
 </div>

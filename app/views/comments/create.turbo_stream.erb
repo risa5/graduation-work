@@ -1,4 +1,4 @@
-<% if @comment.errors.present? %>
+<% if @comment.errors.any? %>
   <%= turbo_stream.replace "comment-form" do %>
     <%= render 'comments/form', comment: @comment, board: @comment.board %>
   <% end %>

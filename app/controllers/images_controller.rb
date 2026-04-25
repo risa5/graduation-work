@@ -7,6 +7,7 @@ class ImagesController < ApplicationController
 
   private
 
+  # 許可するカラムの指定
   def ogp_params
     params.permit(:text)
   end

@@ -1,11 +1,12 @@
 import "@hotwired/turbo-rails";
 import "./controllers";
+import "./terms_checkbox"
 import "@popperjs/core";
 import "bootstrap";
+
 import $ from "jquery"
 window.$ = $
 window.jQuery = $
-import "./terms_checkbox"
 
 import Dropdown from "bootstrap/js/dist/dropdown";
 import Collapse from "bootstrap/js/dist/collapse";

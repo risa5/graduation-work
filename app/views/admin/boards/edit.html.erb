@@ -4,7 +4,16 @@
   <div class="row">
     <div class="col-11 col-md-10 col-lg-9 mx-auto">
       <h2><%= t('.title') %></h2>
+
+      <!-- 投稿内容編集フォーム -->
+      <div class="bg-white bg-opacity-50 rounded-3 p-4">
         <%= render 'form', board: @board %>
+      </div>
+
+      <!-- 戻るボタン -->
+      <div class='my-3'>
+        <%= link_to "掲示板管理画面へ戻る", admin_boards_path, class: 'btn btn-success float-end' %>
+      </div>
     </div>
   </div>
 </div>

@@ -30,7 +30,8 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-
+  
+  # 許可するカラムの指定
   def user_params
     params.require(:user).permit(:email, :name, :role, :image, :image_cache)
   end

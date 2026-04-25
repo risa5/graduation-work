@@ -1,31 +1,52 @@
-<div class="col-sm-12 col-lg-4">
-  <div id="board-id-<%= board.id %>">
-    <div class="card h-100">
-      <%= image_tag board.board_image_url, class: "card-img-top", width: "300", height:"200" %>
-      <div class="card-body">
-        <div class="d-flex align-items-center">
-          <h4 class="card-title mb-0">
-            <%= link_to board.title, board_path(board) %>
-          </h4>
-          <% if current_user.own?(board) %>
-            <div class='ms-auto'>
-              <%= link_to edit_board_path(board), id: "button-edit-#{board.id}" do %>
-                <i class="bi bi-pencil-fill"></i>
-              <% end %>
-              <%= link_to board_path(board), id: "button-delete-#{board.id}", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
-                <i class="bi bi-trash-fill"></i>
-              <% end %>
-            </div>
-          <% else %>
+<!-- 掲示板カード1件分の横幅 -->
+<div class="col-12 col-lg-4">
+
+  <!-- 画像表示 -->
+  <div class="card h-100 position-relative">
+    <%= image_tag board.board_image_url, class: "card-img-top", width: "300", height: "200" %>
+
+    <!-- タイトル表示・カード全体をリンク化 -->
+    <div class="card-body">
+      <div class="d-flex align-items-center">
+        <h6 class="card-title mb-0">
+          <%= link_to board.title, board_path(board), class: "stretched-link fw-bold text-secondary-emphasis" %>
+        </h6>
+
+        <!-- ブックマークor編集・削除ボタン&いいねボタン表示 -->
+        <% if current_user.own?(board) %>
+          <div class="d-flex ms-auto position-relative gap-1" style="z-index: 1;">
+            <%= link_to edit_board_path(board),class: "text-decoration-none" do %>
+              <i class="bi bi-pencil-fill text-success me-1"></i>
+            <% end %>
+            <%= link_to board_path(board), class: "text-decoration-none", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
+              <i class="bi bi-trash-fill text-danger"></i>
+            <% end %>
+              <%= render 'boards/like_area', board: board %>
+          </div>
+        <% else %>
+          <div class="d-flex ms-auto position-relative align-items-center" style="z-index: 1;">
+          <div class="pe-1">
             <%= render 'bookmark_buttons', { board: board } %>
-          <% end %>
-        </div>
-        <ul class="list-inline mt-2 mb-1" id="board_list">
-          <li><i class="bi bi-person"></i> <%= board.user.name %></li>
-          <li><i class="bi bi-calendar"></i> <%= board.created_at.strftime("%Y/%m/%d %H:%M") %></li>
-        </ul>
-        <p class="card-text <%= 'board-body' if truncate %>"><%= board.body %></p>
+          </div>
+            <%= render 'boards/like_area', board: board %>
+          </div>
+        <% end %>
       </div>
+
+      <!-- 投稿者名・投稿日表示 -->
+      <ul class="list-inline mt-2 mb-1">
+        <li class="fs-6 fw-light">
+          <i class="bi bi-person"></i>
+          <%= board.user.name %>
+        </li>
+        <li class="fs-6 fw-light">
+          <i class="bi bi-calendar"></i>
+          <%= l board.created_at, format: :long %>
+        </li>
+      </ul>
+
+      <!-- 本文表示 -->
+      <p class="card-text board-body"><%= board.body %></p>
     </div>
   </div>
 </div>

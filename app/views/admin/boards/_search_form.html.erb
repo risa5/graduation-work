@@ -1,22 +1,25 @@
 <%= search_form_for @q, url: admin_boards_path do |f| %>
   <div class="row g-2 justify-content-center align-items-end">
 
-    <div class="col-11 col-md-4 col-lg-3">
+    <!-- タイトル検索 -->
+    <div class="col-12 col-md-4 col-lg-3">
       <label class="form-label">タイトル検索</label>
       <%= f.search_field :title_cont, class: 'form-control', placeholder: "タイトル" %>
     </div>
 
-    <div class="col-11 col-md-4 col-lg-3">
+    <!-- 本文検索 -->
+    <div class="col-12 col-md-4 col-lg-3">
       <label class="form-label">本文検索</label>
       <%= f.search_field :body_cont, class: 'form-control', placeholder: "本文" %>
     </div>
 
-    <div class="col-11 col-md-4 col-lg-3">
+    <!-- 作成日検索 -->
+    <div class="col-12 col-md-4 col-lg-3">
       <label class="form-label">作成日検索</label>
       <div class="d-flex align-items-center gap-2">
-        <%= f.date_field :created_at_gteq %>
+        <%= f.date_field :created_at_gteq, class: 'form-control' %>
           <span class="pe-none">～</span>
-        <%= f.date_field :created_at_lteq %>
+        <%= f.date_field :created_at_lteq, class: 'form-control' %>
       </div>
     </div>
     

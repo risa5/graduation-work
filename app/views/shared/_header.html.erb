@@ -19,7 +19,7 @@
     <div class='collapse navbar-collapse' id='navbarSupportedContent'>
       <ul class='navbar-nav ms-auto main-nav align-items-center'>
 
-      <%# 管理者だけに管理メニューを表示 %>
+      <!-- 管理者だけに管理メニューを表示 -->
         <% if current_user&.admin? %>
           <li class="nav-item dropdown bg-danger bg-opacity-50 rounded-2">
             <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">管理者用メニュー</a>
@@ -60,19 +60,22 @@
                       data: { bs_toggle: 'dropdown' },
                       aria: { haspopup: 'true', expanded: 'false' },
                       id: 'header-profile' do %>
-            <%= image_tag current_user.image_url, class: 'rounded-circle mr15', width: '40', height: '40' %>
+            <%= image_tag current_user.image_url, class: 'rounded-circle mr15 border border-secondary', width: '40', height: '40' %>
           <% end %>
 
           <div class='dropdown-menu dropdown-menu-end'
             aria-labelledby='header-profile'> 
             <div class='dropdown-item'><%= link_to current_user.name , profile_path, class: 'dropdown-item' %></div>
             <div class='dropdown-divider'></div>
-            <!-- ブックマークページへのリンク（見た目のみ調整：nav-link → dropdown-item） -->
+
+            <!-- ブックマークページへのリンク -->
             <%= link_to t('header.bookmark_index'), bookmarks_boards_path, class: 'dropdown-item' %>
-            <!-- ログアウトボタン（機能は変更せずそのまま） -->
-            <%= form_with url: logout_path, method: :delete, data: { turbo: false } do %>
-              <%= submit_tag "ログアウト", class: "btn btn-danger" %>
-            <% end %>
+
+            <!-- ログアウトボタン -->
+            <div class="ms-3">
+              <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete }, class: "text-danger text-decoration-none fw-bold" %>
+            </div>
+
           </div>
         </li>
       </ul>

@@ -1,5 +1,15 @@
-
+.comment-icon-cell{
+  width: 60px;
+}
 .comment-body {
   overflow-wrap: anywhere;
+}
+
+.comment-body p {
+  margin: 0;
   white-space: pre-wrap;
+}
+
+.comment-meta {
+  margin-bottom: 0;
 }

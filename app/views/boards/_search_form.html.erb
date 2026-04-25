@@ -1,21 +1,66 @@
 <%= search_form_for q, url: url, method: :get do |f| %>
-  <div class="input-group mb-3 position-relative"
-      data-controller="autocomplete"
-      data-autocomplete-url-value="<%= autocomplete_boards_path %>"
-      role="combobox">
+  <div class="row g-2 justify-content-center align-items-end">
 
-    <input type="text"
-          name="q[title_or_body_cont]"
-          class="form-control"
-          placeholder="<%= t('defaults.search_word') %>"
-          data-autocomplete-target="input" />
+    <!-- タイトル検索（オートコンプリート） -->
+    <div class="col-12 col-md-4 col-lg-3">
+      <div class="position-relative"
+          data-controller="autocomplete"
+          data-autocomplete-url-value="<%= autocomplete_boards_path %>"
+          data-autocomplete-field-value="title">
 
-    <ul class="list-group position-absolute w-100"
-        style="z-index:1000; max-height: 10rem; overflow-y: scroll;"
-        data-autocomplete-target="results"></ul>
+        <label class="form-label">タイトル検索</label>
+        <%= f.search_field :title_cont,
+            class: "form-control",
+            placeholder: "タイトル",
+            data: {
+              autocomplete_target: "input",
+              action: "input->autocomplete#search"
+            } %>
 
-    <div class="input-group-append">
-      <%= f.submit class: 'btn btn-primary' %>
+        <ul class="list-group position-absolute w-100"
+            style="top: 100%; left: 0; z-index: 1000; max-height: 10rem; overflow-y: auto;"
+            data-autocomplete-target="results">
+        </ul>
+      </div>
+    </div>
+
+    <!-- 本文検索（オートコンプリート） -->
+    <div class="col-12 col-md-4 col-lg-3">
+      <div class="position-relative"
+          data-controller="autocomplete"
+          data-autocomplete-url-value="<%= autocomplete_boards_path %>"
+          data-autocomplete-field-value="body">
+
+        <label class="form-label">本文検索</label>
+        <%= f.search_field :body_cont,
+            class: "form-control",
+            placeholder: "本文",
+            data: {
+              autocomplete_target: "input",
+              action: "input->autocomplete#search"
+            } %>
+
+        <ul class="list-group position-absolute w-100"
+            style="top: 100%; left: 0; z-index: 1000; max-height: 10rem; overflow-y: auto;"
+            data-autocomplete-target="results">
+        </ul>
+      </div>
+    </div>
+
+    <!-- 作成日検索 -->
+    <div class="col-12 col-md-4 col-lg-3">
+      <label class="form-label">作成日検索</label>
+      <div class="d-flex align-items-center gap-2">
+        <%= f.date_field :created_at_gteq, class: "form-control" %>
+        <span class="pe-none">～</span>
+        <%= f.date_field :created_at_lteq, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="d-grid gap-2 col-6 mx-auto mt-1">
+      <%= f.submit class: "btn btn-secondary" %>
     </div>
   </div>
 <% end %>

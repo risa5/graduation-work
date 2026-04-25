@@ -1,25 +1,46 @@
+<% content_for(:title, t('.title')) %>
+
 <div class="container py-4">
   <div class="row">
-    <div class="col-11 col-md-11 col-lg-10 mx-auto">
-      <div class="terms-page bg-white bg-opacity-50 rounded-3 p-4">
-      <h2 class="float-left mb-5"><%= t('.title') %></h2>
-      <p>
-        <table class="table">
-          <tr>
-            <th scope="row"><%= User.human_attribute_name(:email) %></th>
-            <td><%= current_user.email %></td>
-          </tr>
-          <tr>
-            <th scope="row"><%= User.human_attribute_name(:name) %></th>
-            <td><%= current_user.name %></td>
-          </tr>
-          <tr>
-            <th scope="row"><%= User.human_attribute_name(:avatar) %></th>
-            <td><%= image_tag current_user.image_url, class: 'rounded-circle', size: '50x50' %></td>
-          </tr>
-        </table>
-      </p>
-      <p><%= link_to t('defaults.profile_edit'), edit_profile_path, class: 'btn btn-secondary' %></p>
+    <div class="col-12 col-md-11 mx-auto">
+
+      <!-- タイトル -->
+      <h2><%= t('.title') %></h2>
+      <div class="bg-white bg-opacity-50 rounded-3 py-4 my-3">
+
+        <div class="row">
+          <div class="col-11 mx-auto">
+
+            <!-- 画像 -->
+            <div class="mb-3 text-center">
+              <div class=""><%= image_tag current_user.image_url, class: 'rounded-circle border border-secondary', size: '100x100' %></div>
+            </div>
+
+            <!-- 名前 -->
+            <div class="mb-3 text-center">
+              <div class="text-muted"><%= User.human_attribute_name(:name) %></div>
+              <div class="fw-bold fs-5"><%= current_user.name %></div>
+            </div>
+
+            <!-- メールアドレス -->
+            <div class="mb-3 text-center">
+              <div class="text-muted"><%= User.human_attribute_name(:email) %></div>
+              <div class="fw-bold fs-5"><%= current_user.email %></div>
+            </div>
+
+            <!-- 編集ボタン -->
+            <div class="text-end">
+              <%= link_to t('defaults.profile_edit'), edit_profile_path, class: 'btn btn-success' %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="m-3 text-end">
+        <%= link_to 'トップ画面へ戻る', current_user.admin? ? admin_root_path : root_path , class: "btn btn-secondary float-end" %>
+      </div>
+
     </div>
   </div>
 </div>

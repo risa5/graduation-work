@@ -1,0 +1,11 @@
+<div id="like-area-for-board-<%= board.id %>" class="d-flex align-items-center gap-1 position-relative">
+  <% if current_user.likes.exists?(board: board) %>
+    <%= render 'boards/unlike', board: board %>
+  <% else %>
+    <%= render 'boards/like', board: board %>
+  <% end %>
+
+  <div class="text-muted">
+    <%= board.likes.count %>
+  </div>
+</div>

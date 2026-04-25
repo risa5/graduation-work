@@ -5,70 +5,80 @@
     <div class="col-11 col-md-10 col-lg-9 mx-auto">
     <h2><%= t('.title') %></h2>
     
-      <div class="board_show bg-white rounded-3 p-4">
+      <div class="bg-white rounded-3 p-4">
 
-        <article class="card">
+        <!-- カードコンテナ -->
+        <article class="card m-2">
+
+          <!-- カード内容 -->
           <div class="card-body">
             <div class="row">
+
+              <!-- 画像表示 -->
               <div class="col-md-3">
                 <%= image_tag @board.board_image_url, width: "300", height: "200", class: "card-img-top img-fluid" %>
               </div>
 
+              <!-- タイトル表示 -->
               <div class="col-md-9">
-                <h3 style="display: inline;"><%= "#{@board.title}" %></h3>
-                <ul class="list-inline board-info">
-                  <li class="list-inline-item">
+                <h3><%= @board.title %></h3>
+
+                <!-- アカウント名・投稿日 -->
+                <ul class="list-inline">
+                  <li class="list-inline-item fs-6 fw-light">
                     <i class="bi bi-person me-1"></i>
-                    <%= "#{@board.user.name}" %>
+                    <%= @board.user.name %>
                   </li>
-                  <li class="list-inline-item">
+                  <li class="list-inline-item fs-6 fw-light">
                     <i class="bi bi-calendar me-1"></i>
-                    <%= @board.created_at.strftime("%Y/%m/%d %H:%M") %>
+                    <%= l @board.created_at, format: :long %>
                   </li>
                 </ul>
 
+              <!-- ブックマークボタンor削除・編集ボタン表示 -->
+              <div class="d-flex justify-content-end align-items-center gap-1">
                 <% if current_user.own?(@board) %>
-                  <div class='d-flex justify-content-end'>
-                    <%= link_to edit_board_path(@board), id: "button-edit-#{@board.id}" do %>
-                      <i class="bi bi-pencil-fill"></i>
+                    <%= link_to edit_board_path(@board) do %>
+                      <i class="bi bi-pencil-fill text-success fs-5"></i>
                     <% end %>
-                    <%= link_to board_path(@board), id: "button-delete-#{@board.id}", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
-                      <i class="bi bi-trash-fill"></i>
-                  </div>
-                <% end %>
-              <% end %>
-
-              <!-- いいね機能 -->
-              <div class= 'd-flex justify-content-end'>
-                <% if current_user.likes.exists?(board: @board) %>
-                  <%= link_to board_like_path(@board), data: { turbo_method: :delete } do %>
-                    <i class="bi bi-heart-fill"></i>
-                  <% end %>
+                    <%= link_to board_path(@board), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
+                      <i class="bi bi-trash-fill text-danger fs-5"></i>
+                    <% end %>
+                    <%= render 'like_area', { board: @board } %>
                 <% else %>
-                  <%= link_to board_like_path(@board), data: { turbo_method: :post } do %>
-                    <i class="bi bi-heart"></i>
-                  <% end %>
+                  <%= render 'bookmark_buttons', { board: @board } %>
+                  <%= render 'like_area', { board: @board } %>
                 <% end %>
-                <!-- いいね数表示 -->
-                <%= @board.likes.count %>
               </div>
             </div>
-            <p><%= simple_format(@board.body) %></p>
+
+            <!-- 本文 -->
+            <div class="py-3">
+              <%= simple_format(@board.body) %>
+            </div>
           </div>
         </article>
       </div>
 
-      <div class="bg-white bg-opacity-50 rounded-3 p-4 mt-4">
-        <%= render 'comments/form', comment: @comment, board: @board %>
+      <!-- コメント機能 -->
+      <div class="bg-white bg-opacity-50 rounded-3 p-2 my-4">
+        <div class="m-4">
+          <%= render 'comments/form', comment: @comment, board: @board %>
+        </div>
+        <div class="m-4">
           <table class="table">
             <tbody id="table-comment">
-            <%= render @comments %>
-          </tbody>
-        </table>
+              <%= render @comments %>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="d-flex justify-content-center gap-2 flex-wrap mt-4">
-        <%= link_to '掲示板一覧画面へ戻る', boards_path, class: "btn btn-secondary" %>
+
+      <!-- 一覧画面へ戻るボタン -->
+      <div class="m-4">
+        <%= link_to '掲示板一覧画面へ戻る', boards_path, class: "btn btn-secondary float-end" %>
       </div>
+
     </div>
   </div>
 </div>

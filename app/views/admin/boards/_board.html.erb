@@ -1,25 +1,33 @@
 <tr>
+  <!-- 各データ表示 -->
   <td>
     <%= board.id %>
-  <td>
-    <%= image_tag board.board_image_url, class: 'img-rounded img-responsive', size: '50x50' %>
   </td>
+  <td>
+    <%= image_tag board.board_image_url, class: 'img-fluid rounded', size: '50x50' %>
   </td>
   <td>
     <%= board.title %>
   </td>
-  <td>
-    <%= board.body %>
+  <td class="admin-board-body-cell">
+    <div class="admin-board-body">
+      <%= board.body %>
+    </div>
+  </td>
+  <td class="admin-date">
+    <%= board.created_at.strftime("%Y/%m/%d") %><br>
+    <%= board.created_at.strftime("%H:%M") %>
+  </td>
+  <td class="admin-date">
+    <%= board.updated_at.strftime("%Y/%m/%d") %><br>
+    <%= board.updated_at.strftime("%H:%M") %>
   </td>
   <td>
-    <%= l board.created_at, format: :long %>
-  </td>
-  <td>
-    <%= l board.updated_at, format: :long %>
-  </td>
-  <td>
-    <%= link_to "詳細", admin_board_path(board), class: 'btn btn-outline-info' %>
-    <%= link_to "編集", edit_admin_board_path(board), class: 'btn btn-outline-success' %>
-    <%= link_to "削除", admin_board_path(board), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: 'btn btn-outline-danger' %>
+    <!-- 各ボタン表示 -->
+    <div class="d-flex flex-column">
+      <%= link_to "詳細", admin_board_path(board), class: 'btn btn-outline-info' %>
+      <%= link_to "編集", edit_admin_board_path(board), class: 'btn btn-outline-success' %>
+      <%= link_to "削除", admin_board_path(board), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: 'btn btn-outline-danger' %>
+    </div>
   </td>
 </tr>

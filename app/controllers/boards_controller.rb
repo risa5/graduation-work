@@ -1,7 +1,10 @@
 class BoardsController < ApplicationController
   def index
     @q = Board.ransack(params[:q])
-    @boards = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    @boards = @q.result(distinct: true)
+                .includes(:user)
+                .order(created_at: :desc)
+                .page(params[:page])
   end
 
   def new
@@ -21,7 +24,9 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find(params[:id])
     @comment = Comment.new
-    @comments = @board.comments.includes(:user).order(created_at: :desc)
+    @comments = @board.comments
+                      .includes(:user)
+                      .order(created_at: :desc)
   end
 
   def edit
@@ -46,19 +51,34 @@ class BoardsController < ApplicationController
 
   def bookmarks
     @q = current_user.bookmark_boards.ransack(params[:q])
-    @bookmark_boards = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    @bookmark_boards = @q.result(distinct: true)
+                          .includes(:user)
+                          .order(created_at: :desc)
+                          .page(params[:page])
   end
 
   def autocomplete
-    term = params[:q].to_s.strip
-    return render inline: "" if term.length < 1
-    scope = Board.ransack(title_or_body_cont: term).result
-    labels = scope.limit(20).map { |b| b.title.presence || b.body.to_s.truncate(30) }.reject(&:blank?).uniq.first(10)
-    render partial: "boards/autocomplete", formats: :html, locals: { labels: labels }
+    keyword = params[:keyword].to_s.strip
+    field = params[:field]
+
+    return render inline: "" if keyword.blank?
+
+    labels =
+      case field
+      when "title"
+        Board.where("title LIKE ?", "%#{keyword}%").distinct.limit(10).pluck(:title)
+      when "body"
+        Board.where("body LIKE ?", "%#{keyword}%").distinct.limit(10).pluck(:body)
+      else
+        []
+      end
+
+    render partial: "autocomplete", locals: { labels: labels }
   end
 
   private
 
+  # 許可するカラムの指定
   def board_params
     params.require(:board).permit(:title, :body, :board_image, :board_image_cache)
   end

@@ -1,8 +1,7 @@
-<div class="row mb-3" id="comment-form">
+<div id="comment-form">
   <%= form_with model: comment, url: board_comments_path(board) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    <!-- <p><h5 class="fs-5 fs-md-4 fs-lg-3"><%= f.label :body %></h5></p> -->
-    <%= f.text_area :body, class: "form-control mb-3", row: "4", placeholder: Comment.human_attribute_name(:field) %>
+    <%= f.text_area :body, class: "form-control mb-3", rows: 2, placeholder: Comment.human_attribute_name(:body) %>
     <div class="text-end">
       <%= f.submit t('comments.post'), class: "btn btn-info" %>
     </div>
