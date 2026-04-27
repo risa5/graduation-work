@@ -50,25 +50,3 @@ const initBootstrapOnce = () => {
 
 document.addEventListener("turbo:load", initBootstrapOnce);
 document.addEventListener("DOMContentLoaded", initBootstrapOnce);
-
-document.addEventListener("DOMContentLoaded", () => {
-  const termsCheckbox = document.getElementById("terms_checkbox");
-  const submitBtn = document.getElementById("submit_btn");
-  const googleWrapper = document.getElementById("google_login_wrapper");
-
-  if (!termsCheckbox) return;
-
-  const toggleButtons = () => {
-    if (termsCheckbox.checked) {
-      submitBtn.disabled = false;
-      googleWrapper.classList.remove("google-disabled");
-    } else {
-      submitBtn.disabled = true;
-      googleWrapper.classList.add("google-disabled");
-    }
-  };
-
-  toggleButtons();
-
-  termsCheckbox.addEventListener("change", toggleButtons);
-});

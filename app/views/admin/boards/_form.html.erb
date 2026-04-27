@@ -1,4 +1,4 @@
-<%= form_with model: board, url: admin_board_path(board), data: { turbo: false } do |f| %>
+<%= form_with model: board, url: admin_board_path(board), mehod: :patch, data: { turbo: false } do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="mb-3">

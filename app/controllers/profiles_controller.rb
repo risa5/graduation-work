@@ -1,11 +1,12 @@
 class ProfilesController < ApplicationController
+  # editとupdateの前にset_userを実行
   before_action :set_user, only: %i[edit update]
 
   def update
     if @user.update(user_params)
-      redirect_to profile_path, success: t('defaults.flash_message.updated', item: User.name)
+      redirect_to profile_path, success: "#{@user.name}さんのプロフィールを更新しました"
     else
-      flash.now['danger'] = t('defaults.flash_message.not_updated', item: User.name)
+      flash.now['danger'] = "プロフィール更新に失敗しました"
       render :edit, status: :unprocessable_entity
     end
   end

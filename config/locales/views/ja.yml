@@ -16,7 +16,7 @@ ja:
     profile_update: プロフィール更新
     show: 詳細
     delete: 削除
-    delete_confirm: 削除しますか？
+    delete_confirm: 本当に削除しますか？
     password_reset: パスワードリセット
     unspecified: 指定なし
     flash_message:

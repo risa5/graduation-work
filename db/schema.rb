@@ -1,4 +1,16 @@
-ActiveRecord::Schema[7.2].define(version: 2025_10_21_133800) do
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema[7.2].define(version: 2026_04_27_200115) do
   create_table "boards", charset: "utf8mb4", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
@@ -110,7 +122,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_21_133800) do
     t.integer "role", default: 0, null: false
     t.string "remember_me_token"
     t.datetime "remember_me_token_expires_at"
+    t.string "provider"
+    t.string "provider_uid"
+    t.string "provider_image"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["provider", "provider_uid"], name: "index_users_on_provider_and_provider_uid", unique: true
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

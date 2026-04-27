@@ -2,7 +2,7 @@
   <td>
     <%= user.id %>
   <td>
-    <%= image_tag user.image_url, class: 'rounded-circle', size: '50x50' %>
+    <%= image_tag user.image_url, class: 'rounded-circle border border-secondary', size: '50x50' %>
   </td>
   </td>
   <td>
@@ -12,7 +12,7 @@
     <%= user.email %>
   </td>
   <td>
-    <%= user.role %>
+    <%= t("enums.user.role.#{user.role}") %>
   </td>
   <td>
     <%= l user.created_at, format: :long %>
@@ -21,8 +21,10 @@
     <%= l user.updated_at, format: :long %>
   </td>
   <td>
-    <%= link_to "詳細", admin_user_path(user), class: 'btn btn-outline-info' %>
-    <%= link_to "編集", edit_admin_user_path(user), class: 'btn btn-outline-success' %>
-    <%= link_to "削除", admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: 'btn btn-outline-danger' %>
+    <div class="d-flex flex-column">
+      <%= link_to "詳細", admin_user_path(user), class: 'btn btn-outline-info btn-sm' %>
+      <%= link_to "編集", edit_admin_user_path(user), class: 'btn btn-outline-success btn-sm' %>
+      <%= link_to "削除", admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: 'btn btn-outline-danger btn-sm' %>
+    </div>
   </td>
 </tr>
