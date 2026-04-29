@@ -6,84 +6,90 @@
     <div class="row">
       <div class="col-12 col-lg-11 mx-auto">
 
-        <!-- タイトル -->
-        <h2><%= t('.title') %></h2>
+      <!-- タイトル -->
+      <h2><%= t('.title') %></h2>
 
-        <!-- 利用規約同意確認 -->
-        <div class="field py-1 text-center">
-          <div class="badge text-bg-warning">必須</div>
-            <%= check_box_tag "terms_accepted", "1", false, id: "terms_checkbox" %>
-            <span class="bg-warning-subtle consent-confirmation small">
-              <%= label_tag "terms_checkbox", "【利用規約・プライバシーポリシー】に同意する" %>
-              <%= link_to '(利用規約・プライバシーポリシー)', terms_path %>
-            </span>
+        <div class="bg-white bg-opacity-50 rounded-3 py-2 my-2">
+
+          <!-- 利用規約同意確認 -->
+          <div class="field py-1 flex-row text-center">
+            <span class="badge text-bg-warning small">必須</span>
+            <%= check_box_tag nil, nil, false, id: "terms_checkbox" %>
+            <%= label_tag "terms_checkbox" ,class:"bg-warning-subtle consent-confirmation small" do %>
+              <%= link_to "（利用規約・プライバシーポリシー）", terms_path %> に同意する
+            <% end %>
           </div>
 
-          <div class="bg-white bg-opacity-50 rounded-3 py-4 my-3">
             <div class="row">
               <div class="col-11 mx-auto">
 
                 <!-- タブ表示 -->
                 <div class="tabs">
-                <p><ul class="nav nav-tabs">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-bs-toggle="tab" href="#standard_registration">通常会員登録</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" href="#google_registration">google会員登録</a>
-                  </li>
-                </ul></p>
-          
+                  <ul class="nav nav-tabs mx-auto justify-content-center nav-fill">
+                    <li class="nav-item">
+                      <a class="nav-link active bg-light-subtle border border-secondary" data-bs-toggle="tab" href="#standard_registration">通常会員登録</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link bg-light-subtle border border-secondary" data-bs-toggle="tab" href="#google_registration">Google会員登録</a>
+                    </li>
+                  </ul>
+
                   <!-- タブコンテンツ -->
-                  <div class="tab-content">
+                  <div class="bg-light-subtle rounded-3">
+                    <div class="tab-content border border-secondary bg-white bg-opacity-50 rounded-bottom p-4">
 
-                    <!-- 通常登録 -->
-                    <div id="standard_registration" class="tab-pane fade show active">
-                      <%= form_with model: @user, url: users_path, method: :post, data: { turbo: false } do |f| %>
-                      <%= render 'shared/error_messages', object: f.object %>
-                        <div class="mb-3">
-                          <%= f.label :name, class: "form-label" %>
-                          <%= f.text_field :name, class: "form-control" %>
+                      <!-- 通常登録 -->
+                      <div id="standard_registration" class="tab-pane fade show active">
+                        <div class="mx-auto" style="max-width: 900px;">
+                          <%= form_with model: @user, url: users_path, method: :post, data: { turbo: false } do |f| %>
+                          <%= render 'shared/error_messages', object: f.object %>
+                            <div class="mb-3">
+                              <%= f.label :name, class: "form-label" %>
+                              <%= f.text_field :name, class: "form-control" %>
+                            </div>
+                            <div class="mb-3">
+                              <%= f.label :email, class: "form-label" %>
+                              <%= f.email_field :email, class: "form-control" %>
+                            </div>
+                            <div class="mb-3">
+                              <%= f.label :password, class: "form-label" %>
+                              <%= f.password_field :password, class: "form-control" %>
+                            </div>
+                            <div class="mb-3">
+                              <%= f.label :password_confirmation, class: "form-label" %>
+                              <%= f.password_field :password_confirmation, class: "form-control" %>
+                            </div>
+                            <div class="text-end">
+                              <%= f.submit "会員登録", class: "btn btn-primary", disabled: true, id: "submit_btn" %>
+                            </div>
+                            <% end %>
+                          </div>
                         </div>
-                        <div class="mb-3">
-                          <%= f.label :email, class: "form-label" %>
-                          <%= f.email_field :email, class: "form-control" %>
-                        </div>
-                        <div class="mb-3">
-                          <%= f.label :password, class: "form-label" %>
-                          <%= f.password_field :password, class: "form-control" %>
-                        </div>
-                        <div class="mb-3">
-                          <%= f.label :password_confirmation, class: "form-label" %>
-                          <%= f.password_field :password_confirmation, class: "form-control" %>
-                        </div>
-                        <div class="text-end">
-                          <%= f.submit "会員登録", class: "btn btn-primary", disabled: true, id: "submit_btn" %>
-                          <% end %>
-                        </div>
-                    </div>
 
-                  <!-- Google登録 -->
-                  <div id="google_registration" class="tab-pane fade">
-                    <div class="google_explanation">
-                      <p>★Googleアカウントで簡単登録</p>
-                      <p>【利用規約・プライバシーポリシー】への同意が必要です</p>
-                    </div>
-                    <div id="google_login_wrapper" class="google-disabled">
-                      <div id="g_id_onload"
-                        data-client_id="934784863584-07bc30bi7qd21in005c81pf4023f3lgq.apps.googleusercontent.com"
-                        data-login_uri="https://www.healscan.jp/auth/google_oauth2/callback"
-                        data-auto_prompt="false">
+                      <!-- Google登録 -->
+                      <div id="google_registration" class="tab-pane fade">
+                        <div class="google_explanation py-4 px-3 text-center">
+                          <p class="mb-2 text-primary-emphasis fw-bold">Googleアカウントで簡単登録できます</p>
+                          <p class="small text-muted mb-4">利用規約・プライバシーポリシーへの同意が必要です</p>
+                        </div>
+                        <div id="google_login_wrapper" class="google-disabled">
+                          <div id="g_id_onload"
+                            data-client_id="934784863584-07bc30bi7qd21in005c81pf4023f3lgq.apps.googleusercontent.com"
+                            data-login_uri="https://www.healscan.jp/auth/google_oauth2/callback"
+                            data-auto_prompt="false">
+                          </div>
+
+                          <!-- Googleログインボタン（押下でGoogleの画面が開く） -->
+                          <div class="g_id_signin"
+                            data-type="standard"
+                            data-size="large"
+                            data-theme="outline"
+                            data-text="sign_in_with"
+                            data-shape="rectangular"
+                            data-logo_alignment="left">
+                          </div>
+                        </div>
                       </div>
-                      <div class="g_id_signin"
-                        data-type="standard"
-                        data-size="large"
-                        data-theme="outline"
-                        data-text="sign_in_with"
-                        data-shape="rectangular"
-                        data-logo_alignment="left">
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
