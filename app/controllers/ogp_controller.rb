@@ -3,9 +3,14 @@ class OgpController < ApplicationController
 
   def diagnosis
     diagnosis = DiagnosisRecord.find(params[:id])
-    image = OgpCreator.build(diagnosis.diagnosis_result.title)
+    diagnosis_result = diagnosis.diagnosis_result
+
+    text = "あなたの診断結果：#{diagnosis_result.pattern_code}"
+
+    image = OgpCreator.build(text)
+
     send_data image.to_blob,
-              type: 'image/png',
-              disposition: 'inline'
+              type: "image/png",
+              disposition: "inline"
   end
 end
