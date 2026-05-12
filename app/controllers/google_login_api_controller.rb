@@ -32,8 +32,10 @@ class GoogleLoginApiController < ApplicationController
     # save!に失敗した場合の例外処理
     rescue StandardError => e
     Rails.logger.error("Google login failed: #{e.class} #{e.message}")
-    redirect_to new_user_path, danger: t("user_sessions.create.failure")
+    redirect_to google_failed_path, danger: t("user_sessions.create.failure")
   end
+
+  private
 
   # 権限判別
   def user_role_path(user)
@@ -45,16 +47,21 @@ class GoogleLoginApiController < ApplicationController
     end
   end
 
-  private
-
+  def google_failed_path
+    case params[:state]
+    when "register"
+      new_user_path
+    else
+      login_path
+    end
+  end
+  
   # Google用CSRF対策
   def verify_g_csrf_token
     if cookies["g_csrf_token"].blank? ||
       params[:g_csrf_token].blank? ||
       cookies["g_csrf_token"] != params[:g_csrf_token]
 
-      redirect_to new_user_path, danger: "不正なアクセスです"
+      redirect_to google_auth_failed_redirect_path, danger: "不正なアクセスです"
     end
   end
-
-end

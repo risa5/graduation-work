@@ -15,6 +15,14 @@ class UserSessionsController < ApplicationController
     end
   end
 
+  def destroy
+    logout
+    redirect_to root_path, status: :see_other, success: t('user_sessions.destroy.success')
+  end
+
+  private
+
+  # 権限判別
   def user_role_path(user)
     case user.role
     when 'admin'
@@ -22,10 +30,5 @@ class UserSessionsController < ApplicationController
     when 'general'
       root_path
     end
-  end
-
-  def destroy
-    logout
-    redirect_to root_path, status: :see_other, success: t('user_sessions.destroy.success')
   end
 end

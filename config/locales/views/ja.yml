@@ -84,7 +84,7 @@ ja:
       title: プロフィール編集
   password_resets:
     new:
-      title: パスワードリセット申請
+      title: パスワード変更
       submit: 送信
     edit:
       title: パスワードリセット

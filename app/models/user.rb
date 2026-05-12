@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
-  attr_accessor :remember_token
+  # attr_accessor :remember_token
 
   validates :password, length: { minimum: 3 }, if: :password_required?
   validates :password, confirmation: true, if: :password_required?
@@ -24,6 +24,7 @@ class User < ApplicationRecord
 
   paginates_per 20
   
+  # 通常登録ユーザーかつ新規登録・パスワード変更時か確認
   def password_required?
     provider.blank? && (new_record? || changes[:crypted_password])
   end

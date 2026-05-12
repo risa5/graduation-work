@@ -24,29 +24,29 @@ class DiagnosesController < ApplicationController
     end
 
     # カテゴリごとの数値計算
-    body_score    = total_score(answers.values, "body")
+    body_score = total_score(answers.values, "body")
     emotion_score = total_score(answers.values, "emotion")
-    mind_score    = total_score(answers.values, "mind")
+    mind_score = total_score(answers.values, "mind")
 
     # パターン特定
-    pattern_code     = determine_pattern_code(body_score, emotion_score, mind_score)
+    pattern_code = determine_pattern_code(body_score, emotion_score, mind_score)
 
     # 結果特定
     diagnosis_result = DiagnosisResult.find_by!(pattern_code: pattern_code)
 
     # 結果保存
     @diagnosis_record = DiagnosisRecord.new(
-      body_score:       body_score,
-      emotion_score:    emotion_score,
-      mind_score:       mind_score,
+      body_score: body_score,
+      emotion_score: emotion_score,
+      mind_score: mind_score,
       diagnosis_result: diagnosis_result,
-      user:             current_user
+      user: current_user
     )
 
     answers.values.each do |ans|
       @diagnosis_record.diagnosis_answers.build(
         question_id: ans["question_id"],
-        choice_id:   ans["choice_id"]
+        choice_id: ans["choice_id"]
       )
     end
 
@@ -64,14 +64,13 @@ class DiagnosesController < ApplicationController
       render :new, status: :unprocessable_entity
   end
 
-
   def show
     @diagnosis_record = DiagnosisRecord.find(params[:id])
     @diagnosis_result = @diagnosis_record.diagnosis_result
     prepare_meta_tags(@diagnosis_result)
   
     text = "あなたの診断結果：#{@diagnosis_result.pattern_code}"
-    url  = request.original_url
+    url = request.original_url
     @tweet_intent_url =
       "https://twitter.com/intent/tweet?text=#{ERB::Util.url_encode(text)}&url=#{ERB::Util.url_encode(url)}&hashtags=Healscan"
   end

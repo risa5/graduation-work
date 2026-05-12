@@ -66,9 +66,13 @@ class BoardsController < ApplicationController
     labels =
       case field
       when "title"
-        Board.where("title LIKE ?", "%#{keyword}%").distinct.limit(10).pluck(:title)
+        Board.where("title LIKE ?", "%#{keyword}%")
+              .distinct.limit(10)
+              .pluck(:title)
       when "body"
-        Board.where("body LIKE ?", "%#{keyword}%").distinct.limit(10).pluck(:body)
+        Board.where("body LIKE ?", "%#{keyword}%")
+              .distinct.limit(10)
+              .pluck(:body)
       else
         []
       end

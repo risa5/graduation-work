@@ -1,8 +1,7 @@
-import { Application } from "@hotwired/stimulus"
-import HelloController from "./hello_controller"
+import { application } from "./application"
+
 import AutocompleteController from "./autocomplete_controller"
+import TermsController from "./terms_controller"
 
-const application = Application.start()
-
-application.register("hello", HelloController)
 application.register("autocomplete", AutocompleteController)
+application.register("terms", TermsController)

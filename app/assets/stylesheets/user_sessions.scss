@@ -1,20 +1,20 @@
-.head-border{
+.head-border {
   display: flex;
   align-items: center;
 }
 
 .head-border:before,
 .head-border:after {
-    content: "";
-    height: 1px;
-    flex-grow: 1;
-    background-color: #666;
+  content: "";
+  height: 1px;
+  flex-grow: 1;
+  background-color: #666;
 }
 
 .head-border:before {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 
 .head-border:after {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }

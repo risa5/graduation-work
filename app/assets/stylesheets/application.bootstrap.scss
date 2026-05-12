@@ -33,11 +33,23 @@ header {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
+  justify-content: flex-end !important;
   gap: 1rem;
   margin-left: auto !important;
-  list-style: none !important;
-  padding-left: 0 !important;
-  margin-bottom: 0 !important;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse.show {
+    display: flex !important;
+    justify-content: flex-end;
+  }
+
+  .navbar-collapse.show .navbar-nav {
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    width: 100%;
+  }
 }
 
 // body

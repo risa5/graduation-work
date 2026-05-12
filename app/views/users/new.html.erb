@@ -9,12 +9,19 @@
       <!-- タイトル -->
       <h2><%= t('.title') %></h2>
 
-        <div class="bg-white bg-opacity-50 rounded-3 py-2 my-2">
+        <div class="bg-white bg-opacity-50 rounded-3 py-4 my-2" data-controller="terms">
 
           <!-- 利用規約同意確認 -->
-          <div class="field py-1 flex-row text-center">
+          <div class="py-1 flex-row text-center">
             <span class="badge text-bg-warning small">必須</span>
-            <%= check_box_tag nil, nil, false, id: "terms_checkbox" %>
+
+            <%= check_box_tag nil, nil, false,
+              id: "terms_checkbox",
+              data: 
+                {action: "change->terms#toggle",
+                terms_target: "checkbox"
+              } %>
+
             <%= label_tag "terms_checkbox" ,class:"bg-warning-subtle consent-confirmation small" do %>
               <%= link_to "（利用規約・プライバシーポリシー）", terms_path %> に同意する
             <% end %>
@@ -41,7 +48,7 @@
                       <!-- 通常登録 -->
                       <div id="standard_registration" class="tab-pane fade show active">
                         <div class="mx-auto" style="max-width: 900px;">
-                          <%= form_with model: @user, url: users_path, method: :post, data: { turbo: false } do |f| %>
+                          <%= form_with model: @user, method: :post, data: { turbo: false } do |f| %>
                           <%= render 'shared/error_messages', object: f.object %>
                             <div class="mb-3">
                               <%= f.label :name, class: "form-label" %>
@@ -60,7 +67,7 @@
                               <%= f.password_field :password_confirmation, class: "form-control" %>
                             </div>
                             <div class="text-end">
-                              <%= f.submit "会員登録", class: "btn btn-primary", disabled: true, id: "submit_btn" %>
+                              <%= f.submit "会員登録", class: "btn btn-primary", disabled: true, data: { terms_target: "submit"} %>
                             </div>
                             <% end %>
                           </div>
@@ -72,10 +79,13 @@
                           <p class="mb-2 text-primary-emphasis fw-bold">Googleアカウントで簡単登録できます</p>
                           <p class="small text-muted mb-4">利用規約・プライバシーポリシーへの同意が必要です</p>
                         </div>
-                        <div id="google_login_wrapper" class="google-disabled">
+                        <div id="google_login_wrapper"
+                            class="google-disabled"
+                            data-terms-target="googleWrapper">
                           <div id="g_id_onload"
                             data-client_id="934784863584-07bc30bi7qd21in005c81pf4023f3lgq.apps.googleusercontent.com"
                             data-login_uri="https://www.healscan.jp/auth/google_oauth2/callback"
+                            data-state="register"
                             data-auto_prompt="false">
                           </div>
 

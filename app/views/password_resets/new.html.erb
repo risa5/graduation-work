@@ -1,15 +1,40 @@
 <% content_for(:title, t('.title')) %>
-<div class="container">
+
+<div class="container py-4">
   <div class="row">
-    <div class="col-md-10 col-lg-8 mx-auto">
-      <h1><%= t('.title') %></h1>
-      <%= form_with url: password_resets_path do |f| %>
-        <div class="mb-3">
-          <%= f.label :email, class: "form-label" %>
-          <%= f.email_field :email, class: 'form-control' %>
+    <div class="col-12 col-lg-11 mx-auto">
+
+      <!-- タイトル -->
+      <h2><%= t('.title') %></h2>
+
+      <div class="bg-white bg-opacity-50 rounded-3 py-4 my-3">
+        <div class="row">
+          <div class="col-11 col-lg-10 mx-auto">
+          
+            <div class="small bg-secondary p-2 m-1 rounded-2 text-center text-white">
+              メールアドレスを入力してください。<br>
+              パスワードリセット用のURLを送付します。
+            </div>
+
+            <!-- 注意事項 -->
+            <div class="m-4">
+              <ul class="small text-danger fw-bold">
+                <li>メールの再送は1時間できません</li>
+                <li>送付されたURLの有効期限は1時間です</li>
+              </ul>
+
+              <!-- リセット用email送信フォーム -->
+              <%= form_with url: password_resets_path, method: :post, local: true do |f| %>
+                <div class="mb-3">
+                  <%= f.label :email, class: "form-label" %>
+                  <%= f.email_field :email, class: 'form-control', required: true %>
+                </div>
+                <%= f.submit t('.submit'), class: "btn btn-primary float-end" %>
+              <% end %>
+            </div>
+          </div>
         </div>
-        <%= f.submit t('.submit'), class: "btn btn-primary" %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,11 +1,11 @@
 <header>
-  <nav class='navbar navbar-expand-lg navigation navbar-light bg-light'>
+  <nav class='navbar navbar-expand-lg navbar-light bg-light'>
     <!-- ロゴ画像をクリックするとトップページ（'/'）へ遷移 -->
     <%= link_to current_user.admin? ? admin_root_path : root_path, class: 'navbar-brand' do %>
       <%= image_tag 'logo.png' %>
     <% end %>
 
-    <!-- ハンバーガーメニュー -->
+    <!-- ハンバーガーメニュー(lg未満のサイズのとき表示) -->
     <button class='navbar-toggler'
             data-bs-toggle='collapse'
             data-bs-target='#navbarSupportedContent'
@@ -15,14 +15,21 @@
       <span class='navbar-toggler-icon'></span>
     </button>
 
-    <!-- ナビゲーションメニュー（PCでは通常表示、スマホでは折りたたみ） -->
-    <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-      <ul class='navbar-nav ms-auto main-nav align-items-center'>
+    <!-- ナビゲーションメニュー（lgでは通常表示、lg未満では折りたたみ） -->
+    <div class='collapse navbar-collapse pull-right' id='navbarSupportedContent'>
+      <ul class="navbar-nav ms-auto main-nav text-end align-items-end align-items-lg-center">
 
-      <!-- 管理者だけに管理メニューを表示 -->
-        <% if current_user&.admin? %>
+        <!-- 管理者だけに管理メニューを表示 -->
+        <% if current_user.admin? %>
           <li class="nav-item dropdown bg-danger bg-opacity-50 rounded-2">
-            <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">管理者用メニュー</a>
+            <a class="nav-link dropdown-toggle"
+                href="#"
+                id="adminMenu"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                管理者用メニュー
+            </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
               <li><%= link_to "ユーザー管理", admin_users_path, class: "dropdown-item" %></li>
               <li><%= link_to "掲示板管理", admin_boards_path, class: "dropdown-item" %></li>
@@ -35,7 +42,7 @@
         </li>
 
         <!-- 掲示板メニュー（ドロップダウン） -->
-        <li class='nav-item dropdown dropdown-slide'>
+        <li class='nav-item dropdown'>
           <!-- 「掲示板」ボタン -->
           <%= link_to '掲示板',
                       '#',
@@ -44,15 +51,18 @@
                       data: { bs_toggle: 'dropdown' },
                       aria: { haspopup: 'true', expanded: 'false' },
                       id: 'header-board-menu' %>
+
+          <!-- ドロップダウンの中身 -->
           <div class='dropdown-menu dropdown-menu-end'
-            aria-labelledby='header-board-menu'>
+            aria-labelledby='header-board-menu'
+            style="z-index: 100;">
             <%= link_to '掲示板一覧', boards_path , class: 'dropdown-item' %>
             <%= link_to '掲示板作成', new_board_path , class: 'dropdown-item' %>
           </div>
         </li>
 
         <!-- ユーザープロフィール（ドロップダウン） -->
-        <li class='nav-item dropdown dropdown-slide'>
+        <li class='nav-item dropdown'>
           <!-- アイコン -->
           <%= link_to '#',
                       class: 'nav-link dropdown-toggle p-0 d-flex align-items-center',
@@ -60,12 +70,13 @@
                       data: { bs_toggle: 'dropdown' },
                       aria: { haspopup: 'true', expanded: 'false' },
                       id: 'header-profile' do %>
-            <%= image_tag current_user.image_url, class: 'rounded-circle mr15 border border-secondary', width: '40', height: '40' %>
+            <%= image_tag current_user.image_url, class: 'rounded-circle border border-secondary', width: '40', height: '40' %>
           <% end %>
 
-          <div class='dropdown-menu dropdown-menu-end'
-            aria-labelledby='header-profile'> 
-            <div class='dropdown-item'><%= link_to current_user.name , profile_path, class: 'dropdown-item' %></div>
+          <div class='dropdown-menu dropdown-menu-end' aria-labelledby='header-profile'> 
+            <div class='dropdown-item'>
+              <%= link_to current_user.name , profile_path, class: 'dropdown-item' %>
+            </div>
             <div class='dropdown-divider'></div>
 
             <!-- ブックマークページへのリンク -->

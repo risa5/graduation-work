@@ -18,14 +18,13 @@ class PasswordResetsController < ApplicationController
   def update
     @token = params[:id]
     @user = User.load_from_reset_password_token(@token)
-
     return not_authenticated if @user.blank?
 
     @user.password_confirmation = params[:user][:password_confirmation]
     if @user.change_password(params[:user][:password])
-      redirect_to login_path, success: t('.success')
+      redirect_to login_path, success: "パスワードの変更が完了しました"
     else
-      flash.now[:danger] = t('.fail')
+      flash.now[:danger] = "パスワードの変更に失敗しました"
       render :edit, status: :unprocessable_entity
     end
   end

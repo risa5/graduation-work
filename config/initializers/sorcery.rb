@@ -404,7 +404,10 @@ Rails.application.config.sorcery.configure do |config|
     #
     # user.reset_password_mailer =
     user.reset_password_mailer = UserMailer
-    user.reset_password_time_between_emails =  1 * 1
+    # 1時間メール再送不可
+    user.reset_password_time_between_emails = 1.hours
+    # 1時間でURL期限切れ
+    user.reset_password_expiration_period = 1.hours
     # Reset password email method on your mailer class.
     # Default: `:reset_password_email`
     #
@@ -419,8 +422,6 @@ Rails.application.config.sorcery.configure do |config|
 
     # How many seconds before the reset request expires. nil for never expires.
     # Default: `nil`
-    #
-    # user.reset_password_expiration_period =
 
     # Hammering protection: how long in seconds to wait before allowing another email to be sent.
     # Default: `5 * 60`

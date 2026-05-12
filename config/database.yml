@@ -8,7 +8,8 @@
 #
 # And be sure to use new-style password hashing:
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
-#
+
+# デフォルト設定
 default: &default
   adapter: mysql2
   encoding: utf8mb4
@@ -17,6 +18,7 @@ default: &default
   password: password
   host: db
 
+# 開発環境用
 development:
   <<: *default
   database: myapp_development
@@ -24,6 +26,8 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
+
+# テスト環境用
 test:
   <<: *default
   database: myapp_test
@@ -47,7 +51,8 @@ test:
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
-#
+
+# 本番環境用
 production:
   <<: *default
   database: myapp_production
