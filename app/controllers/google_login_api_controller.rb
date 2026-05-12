@@ -65,3 +65,4 @@ class GoogleLoginApiController < ApplicationController
       redirect_to google_auth_failed_redirect_path, danger: "不正なアクセスです"
     end
   end
+end
