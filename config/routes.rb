@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  post '/google_login_api/callback', to: 'google_login_api#callback'
-  get 'images/ogp.png', to: 'images#ogp', as: 'images_ogp'
   root 'static_pages#top'
+  post "auth/google_oauth2/callback", to: "google_login_api#callback"
+
+  get 'images/ogp.png', to: 'images#ogp', as: 'images_ogp'
+
   get '/terms', to: 'pages#terms'
   get    "login",  to: "user_sessions#new"
   post   "login",  to: "user_sessions#create"
