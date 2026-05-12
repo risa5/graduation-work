@@ -34,6 +34,8 @@ gem "bcrypt", "~> 3.1.7"
 
 gem 'carrierwave', '2.2.2'
 
+gem "cloudinary"
+
 gem 'letter_opener_web', '2.0.0'
 
 gem 'config'
