@@ -23,7 +23,7 @@ jobs:
           bundler-cache: true
 
       - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
+        run: bundle exec brakeman --no-pager
 
   # RuboCop
   lint:
@@ -45,6 +45,26 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: graduation_work_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -ppassword"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      RAILS_ENV: test
+      MYSQL_HOST: db
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -60,6 +80,9 @@ jobs:
 
       - name: Build assets
         run: yarn build
+
+      - name: Prepare database
+        run: bin/rails db:prepare
 
       - name: Run RSpec
         run: bundle exec rspec
