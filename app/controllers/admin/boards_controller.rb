@@ -17,7 +17,7 @@ class Admin::BoardsController < ApplicationController
   def destroy
     @board = Board.find(params[:id])
     @board.destroy!
-    redirect_to admin_boards_path, success: '削除に成功しました', status: :see_other
+    redirect_to admin_boards_path, success: "削除に成功しました", status: :see_other
   end
 
   def edit
@@ -26,15 +26,15 @@ class Admin::BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      redirect_to admin_board_path(@board), success: '更新に成功しました'
+      redirect_to admin_board_path(@board), success: "更新に成功しました"
     else
-      flash.now['danger']  = '更新に失敗しました'
+      flash.now["danger"]  = "更新に失敗しました"
       render :edit, status: :unprocessable_entity
     end
   end
 
   private
-  
+
   # 許可するカラムの指定
   def board_params
     params.require(:board).permit(:title, :body, :board_image, :board_image_cache)

@@ -23,21 +23,21 @@ class User < ApplicationRecord
   enum role: { general: 0, admin: 1 }
 
   paginates_per 20
-  
+
   # 通常登録ユーザーかつ新規登録・パスワード変更時か確認
   def password_required?
     provider.blank? && (new_record? || changes[:crypted_password])
   end
 
   def self.ransackable_attributes(_auth_object = nil)
-    ["name", "role"]
+    [ "name", "role" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["name", "role"]
+    [ "name", "role" ]
   end
 
-  #　ログインしているuserのIDとオブジェクトのuserIDが一致するか確認するメソッド 
+  # 　ログインしているuserのIDとオブジェクトのuserIDが一致するか確認するメソッド
   def own?(object)
     id == object&.user_id
   end

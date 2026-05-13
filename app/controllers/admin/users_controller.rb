@@ -10,15 +10,15 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def edit;
+  def edit
     @user = User.find(params[:id])
   end
 
   def update
     if @user.update(user_params)
-      redirect_to admin_user_path(@user), success: t('defaults.flash_message.updated', item: User.name)
+      redirect_to admin_user_path(@user), success: t("defaults.flash_message.updated", item: User.name)
     else
-      flash.now['danger'] = t('defaults.flash_message.not_updated', item: User.name)
+      flash.now["danger"] = t("defaults.flash_message.not_updated", item: User.name)
       render :edit, status: :unprocessable_entity
     end
   end
@@ -26,11 +26,11 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy!
-    redirect_to admin_users_path, success: '削除に成功しました', status: :see_other
+    redirect_to admin_users_path, success: "削除に成功しました", status: :see_other
   end
 
   private
-  
+
   # 許可するカラムの指定
   def user_params
     params.require(:user).permit(:email, :name, :role, :image, :image_cache)
@@ -39,5 +39,4 @@ class Admin::UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
-
 end

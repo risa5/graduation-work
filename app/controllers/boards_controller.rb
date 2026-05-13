@@ -14,13 +14,13 @@ class BoardsController < ApplicationController
   def create
     @board = current_user.boards.build(board_params)
     if @board.save
-      redirect_to boards_path, success: t('defaults.flash_message.created',item: t('activerecord.models.board'))
+      redirect_to boards_path, success: t("defaults.flash_message.created", item: t("activerecord.models.board"))
     else
-      flash.now[:danger] = t('defaults.flash_message.not_created',item: t('activerecord.models.board'))
+      flash.now[:danger] = t("defaults.flash_message.not_created", item: t("activerecord.models.board"))
       render :new, status: :unprocessable_entity
     end
   end
-  
+
   def show
     @board = Board.find(params[:id])
     @comment = Comment.new
@@ -36,9 +36,9 @@ class BoardsController < ApplicationController
   def update
     @board = current_user.boards.find(params[:id])
     if @board.update(board_params)
-      redirect_to board_path(@board), success: t('defaults.flash_message.updated',item: t('activerecord.models.board'))
+      redirect_to board_path(@board), success: t("defaults.flash_message.updated", item: t("activerecord.models.board"))
     else
-      flash.now[:danger] = t('defaults.flash_message.not_updated',item: t('activerecord.models.board'))
+      flash.now[:danger] = t("defaults.flash_message.not_updated", item: t("activerecord.models.board"))
       render :edit, status: :unprocessable_entity
     end
   end
@@ -46,7 +46,7 @@ class BoardsController < ApplicationController
   def destroy
     board = current_user.boards.find(params[:id])
     board.destroy!
-    redirect_to boards_path, success: t('defaults.flash_message.deleted',item: t('activerecord.models.board')), status: :see_other
+    redirect_to boards_path, success: t("defaults.flash_message.deleted", item: t("activerecord.models.board")), status: :see_other
   end
 
   def bookmarks

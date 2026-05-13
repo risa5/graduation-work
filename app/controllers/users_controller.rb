@@ -7,24 +7,24 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    
+
     if @user.save
       auto_login(@user)
-      redirect_to user_role_path(@user), success: t('users.create.success')
+      redirect_to user_role_path(@user), success: t("users.create.success")
     else
-      flash.now[:danger] = t('users.create.failure')
+      flash.now[:danger] = t("users.create.failure")
       render :new, status: :unprocessable_entity
     end
   end
-  
+
   private
 
   # 権限判別
   def user_role_path(user)
     case user.role
-    when 'admin'
+    when "admin"
       admin_root_path
-    when 'general'
+    when "general"
       root_path
     end
   end

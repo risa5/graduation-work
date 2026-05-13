@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def not_authenticated
-    redirect_to login_path, danger: 'ログインが必要です'
+    redirect_to login_path, danger: "ログインが必要です"
   end
 
   def prepare_meta_tags(result)
@@ -14,16 +14,16 @@ class ApplicationController < ActionController::Base
 
     set_meta_tags(
       og: {
-        site_name: 'HealScan',
+        site_name: "HealScan",
         title:     result.pattern_code,
         description: result.result_summary.to_s,
-        type:      'website',
+        type:      "website",
         url:       request.original_url,
         image:     image_url,
-        locale:    'ja-JP'
+        locale:    "ja-JP"
       },
       twitter: {
-        card:  'summary_large_image',
+        card:  "summary_large_image",
         image: image_url
       }
     )

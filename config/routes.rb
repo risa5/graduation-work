@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  root 'static_pages#top'
+  root "static_pages#top"
   post "auth/google_oauth2/callback", to: "google_login_api#callback"
 
   get "ogp/diagnoses/:id.png", to: "ogp#diagnosis"
 
-  get '/terms', to: 'pages#terms'
+  get "/terms", to: "pages#terms"
   get    "login",  to: "user_sessions#new"
   post   "login",  to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy", as: :logout
@@ -32,5 +32,4 @@ Rails.application.routes.draw do
   end
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-
 end

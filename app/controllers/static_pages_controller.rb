@@ -4,4 +4,3 @@ class StaticPagesController < ApplicationController
   # トップページの表示アクション
   def top; end
 end
-

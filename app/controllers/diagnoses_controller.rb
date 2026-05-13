@@ -16,7 +16,7 @@ class DiagnosesController < ApplicationController
     @diagnosis_record = DiagnosisRecord.new
     @questions.each { @diagnosis_record.diagnosis_answers.build }
 
-    # エラー表示 
+    # エラー表示
     if answers.blank? || answers.values.any? { |ans| ans["choice_id"].blank? }
       @diagnosis_record.errors.add(:base, "すべての質問に回答してください")
       render :new, status: :unprocessable_entity
@@ -68,7 +68,7 @@ class DiagnosesController < ApplicationController
     @diagnosis_record = DiagnosisRecord.find(params[:id])
     @diagnosis_result = @diagnosis_record.diagnosis_result
     prepare_meta_tags(@diagnosis_result)
-  
+
     text = "あなたの診断結果：#{@diagnosis_result.pattern_code}"
     url = request.original_url
     @tweet_intent_url =
@@ -80,7 +80,7 @@ class DiagnosesController < ApplicationController
   # 許可するカラムの指定
   def diagnosis_record_params
     params.require(:diagnosis_record).permit(
-      diagnosis_answers_attributes: [:question_id, :choice_id]
+      diagnosis_answers_attributes: [ :question_id, :choice_id ]
     )
   end
 

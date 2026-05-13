@@ -20,37 +20,37 @@ gem "cssbundling-rails"
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
-gem 'ransack', '4.2'
+gem "ransack", "4.2"
 
-gem 'rails-i18n', '~> 7.0'
+gem "rails-i18n", "~> 7.0"
 
-gem 'kaminari', '1.2.2'
+gem "kaminari", "1.2.2"
 
-gem 'bootstrap5-kaminari-views'
+gem "bootstrap5-kaminari-views"
 
-gem 'sorcery', github: "Sorcery/sorcery"
+gem "sorcery", github: "Sorcery/sorcery"
 
 gem "bcrypt", "~> 3.1.7"
 
-gem 'carrierwave', '2.2.2'
+gem "carrierwave", "2.2.2"
 
 gem "cloudinary"
 
-gem 'letter_opener_web', '2.0.0'
+gem "letter_opener_web", "2.0.0"
 
-gem 'config'
+gem "config"
 
-gem 'enum_help', '0.0.19'
+gem "enum_help", "0.0.19"
 
-gem 'mini_magick'
+gem "mini_magick"
 
-gem 'meta-tags', require: 'meta_tags'
+gem "meta-tags", require: "meta_tags"
 
-gem 'googleauth'
+gem "googleauth"
 
-gem 'jquery-rails'
+gem "jquery-rails"
 
-gem 'omniauth-google-oauth2'
+gem "omniauth-google-oauth2"
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

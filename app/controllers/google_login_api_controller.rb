@@ -1,5 +1,5 @@
 class GoogleLoginApiController < ApplicationController
-  require 'googleauth/id_tokens/verifier'
+  require "googleauth/id_tokens/verifier"
 
   # ログイン前にcallbackにアクセス可能
   skip_before_action :require_login, only: :callback
@@ -10,7 +10,7 @@ class GoogleLoginApiController < ApplicationController
 
   def callback
     # Googleからのデータ取得
-    user_info = Google::Auth::IDTokens.verify_oidc(params[:credential], aud: '934784863584-07bc30bi7qd21in005c81pf4023f3lgq.apps.googleusercontent.com')
+    user_info = Google::Auth::IDTokens.verify_oidc(params[:credential], aud: "934784863584-07bc30bi7qd21in005c81pf4023f3lgq.apps.googleusercontent.com")
 
     # Google認証済みユーザーか確認
     user = User.find_by(provider: "google", provider_uid: user_info["sub"])
@@ -40,9 +40,9 @@ class GoogleLoginApiController < ApplicationController
   # 権限判別
   def user_role_path(user)
     case user.role
-    when 'admin'
+    when "admin"
       admin_root_path
-    when 'general'
+    when "general"
       root_path
     end
   end
@@ -55,7 +55,7 @@ class GoogleLoginApiController < ApplicationController
       login_path
     end
   end
-  
+
   # Google用CSRF対策
   def verify_g_csrf_token
     if cookies["g_csrf_token"].blank? ||

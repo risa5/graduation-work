@@ -4,7 +4,7 @@ class UserSessionsController < ApplicationController
   def new; end
 
   def create
-    remember_flag = ActiveModel::Type::Boolean.new.cast(params[:remember]) 
+    remember_flag = ActiveModel::Type::Boolean.new.cast(params[:remember])
     @user = login(params[:email], params[:password], remember_me: remember_flag)
 
     if @user
@@ -17,7 +17,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to root_path, status: :see_other, success: t('user_sessions.destroy.success')
+    redirect_to root_path, status: :see_other, success: t("user_sessions.destroy.success")
   end
 
   private
@@ -25,9 +25,9 @@ class UserSessionsController < ApplicationController
   # 権限判別
   def user_role_path(user)
     case user.role
-    when 'admin'
+    when "admin"
       admin_root_path
-    when 'general'
+    when "general"
       root_path
     end
   end
