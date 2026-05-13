@@ -1,11 +1,14 @@
 name: CI
 
+# プルリクエスト作成時・mainブランチにプッシュ時に実行
 on:
   pull_request:
   push:
     branches: [ main ]
 
+# 実行内容
 jobs:
+  # Brakeman
   scan_ruby:
     runs-on: ubuntu-latest
 
@@ -22,6 +25,7 @@ jobs:
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
 
+  # RuboCop
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -36,4 +40,3 @@ jobs:
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github
-
