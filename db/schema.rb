@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_04_27_200115) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_13_201507) do
   create_table "boards", charset: "utf8mb4", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
@@ -48,15 +48,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_27_200115) do
     t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_comments_on_board_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "diagnoses", charset: "utf8mb4", force: :cascade do |t|
-    t.string "question1", null: false
-    t.string "question2", null: false
-    t.string "question3", null: false
-    t.string "result"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "diagnosis_answers", charset: "utf8mb4", force: :cascade do |t|
