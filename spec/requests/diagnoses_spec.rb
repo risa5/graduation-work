@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe "Diagnoses", type: :request do
   describe "POST /diagnoses" do
-
     # diagnosis_resultデータを生成
     let!(:diagnosis_result) do
       DiagnosisResult.create!(
