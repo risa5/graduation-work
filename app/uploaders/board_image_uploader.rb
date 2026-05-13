@@ -1,7 +1,6 @@
 class BoardImageUploader < CarrierWave::Uploader::Base
   if Rails.env.production?
     include Cloudinary::CarrierWave
-    storage :fog
   else
     storage :file
   end
