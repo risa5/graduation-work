@@ -18,7 +18,7 @@ class GoogleLoginApiController < ApplicationController
     user ||= User.new
 
     user.email = user_info["email"]
-    user.name = user_info["name"]
+    user.name ||= user_info["name"]
     user.provider = "google"
     user.provider_uid = user_info["sub"]
     user.provider_image = user_info["picture"]
