@@ -8,19 +8,25 @@
       <h2><%= t('.title') %></h2>
 
       <!-- 結果表示 -->
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-8 rounded-3 p-2 my-2 shadow-sm result-card">
-          <div class="m-2 text-center">
-            <span class="fw-bold fs-5">現在のあなたは</span>
-            <span class="fw-bold fs-3">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-8">
+          <div class="text-center rounded-3 p-2 my-1 shadow-sm result-card">
+            <div class="fw-bold fs-5">現在のあなたは</div>
+            <div class="fw-bold fs-3">
               <%= @diagnosis_result.pattern_code %>
-            </span>
-            <canvas id="result_chart" data-body-score="<%= @diagnosis_record.body_score %>" data-mind-score="<%= @diagnosis_record.mind_score %>" data-emotion-score="<%= @diagnosis_record.emotion_score_score %>"></canvas>
-            <span class="fw-bold fs-5">を抱えている可能性があります</span>
+            </div>
+            <div class="fw-bold fs-5">を抱えている可能性があります</div>
           </div>
         </div>
+
+        <!-- レーダーチャート表示 -->
+        <div class="col-12 col-md-4 style="height: 250px;">
+          <canvas id="result_chart" data-body-score="<%= @diagnosis_record.body_score %>"
+                            data-mind-score="<%= @diagnosis_record.mind_score %>"
+                            data-emotion-score="<%= @diagnosis_record.emotion_score %>"></canvas>
+        </div>
       </div>
-      
+
       <div class="bg-white bg-opacity-50 rounded-3 p-4 mb-4 shadow-sm text-center">
         <p class="fs-5 mb-5 text-muted">
           <%= @diagnosis_result.result_summary %>
