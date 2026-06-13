@@ -15,7 +15,11 @@
             <div class="fw-bold fs-3">
               <%= @diagnosis_result.pattern_code %>
             </div>
-            <div class="fw-bold fs-5">を抱えている可能性があります</div>
+            <% if @diagnosis_result.pattern_code == '疲労なし' %>
+              <div class="fw-bold fs-5">です</div>
+            <% else %>
+              <div class="fw-bold fs-5">を抱えている可能性があります</div>
+            <% end %>
           </div>
         </div>
 
