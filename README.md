@@ -4,6 +4,7 @@ HealScanは、質問に回答することで、その日の心身状態に合っ
 
 # ■サービスURL
 https://www.healscan.jp
+※公開を停止しました。
 
 # ■ER図
 [![Image from Gyazo](https://i.gyazo.com/c0b9e11fe43ef2a2a9ccc2419eabf67e.png)](https://gyazo.com/c0b9e11fe43ef2a2a9ccc2419eabf67e)
